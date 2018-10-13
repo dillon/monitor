@@ -7,9 +7,6 @@ import SignUp from './screens/SignUp'
 import Login from './screens/Login'
 import Main from './screens/Main'
 import PasswordReset from './screens/PasswordReset'
-import Transactions from './screens/Transactions'
-import Wallets from './screens/Wallets'
-import Settings from './screens/Settings'
 
 
 

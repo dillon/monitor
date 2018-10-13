@@ -2,7 +2,8 @@
 
 ## Testing
 
-`yarn run ios`
+run `yarn run start` in one terminal window
+once it is Loading Dependency Graph, in a seperate terminal window, run `yarn run ios`
 
 ## APIs
 

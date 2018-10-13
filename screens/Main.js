@@ -8,9 +8,9 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 
 import firebase from 'react-native-firebase'
 
-import Transactions from './Transactions'
-import Wallets from './Wallets'
-import Settings from './Settings'
+import Transactions from './logged_in/Transactions'
+import Wallets from './logged_in/Wallets'
+import Settings from './logged_in/Settings'
 
 
 const MainNavigation = createBottomTabNavigator({

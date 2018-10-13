@@ -14,7 +14,7 @@ export default class Settings extends React.Component {
                         {errorMessage}
                     </Text>}
                 <Text>
-                    Hi {currentUser && currentUser.email}
+                    Hi there {currentUser && currentUser.email}
                 </Text>
                 <Text>
                     Your uid is {currentUser && currentUser.uid}
