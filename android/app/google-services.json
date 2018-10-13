@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "13346713522",
+    "firebase_url": "https://monitor-3f707.firebaseio.com",
+    "project_id": "monitor-3f707",
+    "storage_bucket": "monitor-3f707.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13346713522:android:f8c1c98293c109bc",
+        "android_client_info": {
+          "package_name": "com.dillonpetito.monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "13346713522-mq9k30ebmeic4rua8da9k171l5vrj6o6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALCMxx3iL3vm8VbAIYzzLATrcDxlnspQo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
