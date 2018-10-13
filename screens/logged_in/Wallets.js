@@ -25,7 +25,7 @@ export default class Wallets extends React.Component {
             // }}
             // style={styles.touchable}
             >
-                <Text>{item.address}</Text>
+                <Text>{item.nickname}: {item.address}</Text>
             </TouchableHighlight >
         )
     }
