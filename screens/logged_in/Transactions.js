@@ -2,8 +2,6 @@ import React from 'react'
 
 import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react-native'
 
-//temp
-// import web3 from 'web3';
 
 export default class Transactions extends React.Component {
     render() {
@@ -14,7 +12,6 @@ export default class Transactions extends React.Component {
                     <Text style={{ color: 'red' }}>
                         {errorMessage}
                     </Text>}
-                    {/* <Text>{web3.utils.hexToAscii('0x4920686176652031303021')}</Text> */}
                 <Text>Transactions</Text>
             </View>
         )
