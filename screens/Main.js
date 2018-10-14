@@ -40,7 +40,7 @@ export default class Main extends React.Component {
   }
 
   readUserData = async (uid) => {
-    firebase.database().ref(`users/${uid}`).once('value', (snapshot) => {
+    firebase.database().ref(`users/${uid}`).on('value', (snapshot) => {
       const val = snapshot.val()
       const walletsArray = Object.keys(val.wallets).map(i => val.wallets[i]);
       this.setState({ theme: val.theme, wallets: walletsArray })
@@ -54,10 +54,14 @@ export default class Main extends React.Component {
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 
-  addAddress = async (address) => {
+  addAddress = async (wallet) => {
     const { uid } = this.state.currentUser
     console.log(this.state)
     console.log(uid)
+    firebase.database().ref(`users/${uid}/wallets`).push(wallet, (data, err) => {
+      if (err) throw new Error(err)
+      else console.log('succesfull push wallet to database. here is data:', data)
+    })
     // TODO: push this new address to database
   }
 

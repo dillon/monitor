@@ -30,8 +30,15 @@ export default class Wallets extends React.Component {
         )
     }
 
-    handleAddAddress = (address) => {
-        this.props.screenProps.addAddress(address)
+    handleAddAddress = () => {
+        const { newAddress } = this.state
+        const wallet = {
+            address: newAddress,
+            isFetchingBalances: true,
+            isFetchingTransactions: true,
+            nickname: 'dillons wallet'
+        }
+        this.props.screenProps.addAddress(wallet)
     }
 
 
@@ -39,10 +46,12 @@ export default class Wallets extends React.Component {
         const { currentUser, errorMessage, theme, wallets, handleSignOut, addAddress } = this.props.screenProps
         return (
             <View style={StyleSheet.absoluteFill}>
+
                 {errorMessage &&
                     <Text style={{ color: 'red' }}>
                         {errorMessage}
                     </Text>}
+
                 <TextInput
                     style={styles.textInput}
                     autoCapitalize="none"
@@ -53,6 +62,9 @@ export default class Wallets extends React.Component {
                     onSubmitEditing={this.handleAddAddress}
                     blurOnSubmit={false}
                 ></TextInput>
+
+                <Button title="Add" onPress={this.handleAddAddress} />
+
                 {wallets &&
                     <FlatList
                         removeClippedSubviews={false}
