@@ -54,6 +54,10 @@ export default class Main extends React.Component {
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 
+  handleErrorMessage = (errorMessage) => {
+      this.setState({errorMessage})
+  }
+
   addAddress = async (wallet) => {
     const { uid } = this.state.currentUser
     console.log(this.state)
@@ -67,7 +71,7 @@ export default class Main extends React.Component {
 
   render() {
     const { currentUser, errorMessage, theme, wallets } = this.state
-    const { handleSignOut, addAddress} = this
+    const { handleSignOut, handleErrorMessage, addAddress} = this
     return (
       <MainNavigation
         screenProps={{
@@ -76,6 +80,7 @@ export default class Main extends React.Component {
           theme,
           wallets,
           handleSignOut,
+          handleErrorMessage,
           addAddress
         }}
         navigation={this.props.navigation}

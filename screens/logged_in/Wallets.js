@@ -2,6 +2,7 @@ import React from 'react'
 
 import { StyleSheet, TouchableHighlight, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
+import { isWallet } from '../../utils/isAddress'
 
 
 export default class Wallets extends React.Component {
@@ -11,6 +12,7 @@ export default class Wallets extends React.Component {
             newAddress: ''
         }
     }
+
     renderItem = (metaItem) => {
         const { item } = metaItem
         console.log(item)
@@ -25,7 +27,7 @@ export default class Wallets extends React.Component {
             // }}
             // style={styles.touchable}
             >
-                <Text>{item.nickname}: {item.address}</Text>
+                <Text>{item.nickname}: {item.address} {item.updated && 'updated!'}</Text>
             </TouchableHighlight >
         )
     }
@@ -36,14 +38,19 @@ export default class Wallets extends React.Component {
             address: newAddress,
             isFetchingBalances: true,
             isFetchingTransactions: true,
-            nickname: 'dillons wallet'
+            nickname: 'dillons wallet',
+            createdOn: new Date()
         }
-        this.props.screenProps.addAddress(wallet)
+
+        if (isWallet(wallet)) {
+            this.props.screenProps.addAddress(wallet); this.props.screenProps.handleErrorMessage(null);
+        }
+        else this.props.screenProps.handleErrorMessage('not a valid address');
     }
 
 
     render() {
-        const { currentUser, errorMessage, theme, wallets, handleSignOut, addAddress } = this.props.screenProps
+        const { currentUser, errorMessage, theme, wallets, handleSignOut, handleErrorMessage, addAddress } = this.props.screenProps
         return (
             <View style={StyleSheet.absoluteFill}>
 
@@ -61,6 +68,7 @@ export default class Wallets extends React.Component {
                     returnKeyType='done'
                     onSubmitEditing={this.handleAddAddress}
                     blurOnSubmit={false}
+                    maxLength={42}
                 ></TextInput>
 
                 <Button title="Add" onPress={this.handleAddAddress} />
