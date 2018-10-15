@@ -55,23 +55,30 @@ export default class Main extends React.Component {
   }
 
   handleErrorMessage = (errorMessage) => {
-      this.setState({errorMessage})
+    this.setState({ errorMessage })
   }
 
   addAddress = async (wallet) => {
     const { uid } = this.state.currentUser
-    console.log(this.state)
-    console.log(uid)
-    firebase.database().ref(`users/${uid}/wallets`).push(wallet, (data, err) => {
-      if (err) throw new Error(err)
-      else console.log('succesfull push wallet to database. here is data:', data)
-    })
-    // TODO: push this new address to database
+
+    firebase.database().ref(`users/${uid}/wallets`).orderByChild('address')
+      .equalTo(wallet.address).once('value', snapshot => {
+        // check if duplicate
+        if (snapshot.exists()) {
+          // if duplicate, set error message
+          this.setState({ errorMessage: 'address already exists' })
+        } else {
+          // if not duplicate, push to database
+          firebase.database().ref(`users/${uid}/wallets`).push(wallet, (data, err) => {
+            if (err) throw new Error(err)
+          }).catch((error) => this.setState({ errorMessage: error.message }))
+        }
+      });
   }
 
   render() {
     const { currentUser, errorMessage, theme, wallets } = this.state
-    const { handleSignOut, handleErrorMessage, addAddress} = this
+    const { handleSignOut, handleErrorMessage, addAddress } = this
     return (
       <MainNavigation
         screenProps={{
