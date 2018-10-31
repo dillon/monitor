@@ -13,6 +13,11 @@ import Wallets from './logged_in/Wallets'
 import Settings from './logged_in/Settings'
 
 
+
+// how to set up a stack navigator for each tab:
+// https://reactnavigation.org/docs/en/tab-based-navigation.html
+
+
 const MainNavigation = createBottomTabNavigator({
   Transactions: Transactions,
   Wallets: Wallets,
@@ -97,32 +102,6 @@ export default class Main extends React.Component {
 }
 
 
-// class Wallets extends React.Component {
-//   render() {
-//     const { currentUser, errorMessage, theme, wallets, handleSignOut } = this.props.screenProps
-//     return (
-//       <View style={styles.container}>
-//         <Text>Wallet</Text>
-//         {errorMessage &&
-//           <Text style={{ color: 'red' }}>
-//             {errorMessage}
-//           </Text>}
-//         <Text>
-//           Hi {currentUser && currentUser.email}
-//         </Text>
-//         <Text>
-//           Your uid is {currentUser && currentUser.uid}
-//         </Text>
-//         <Text>
-//           Your theme is {theme && theme}
-//         </Text>
-//         <Button title='Sign Out' onPress={handleSignOut} />
-//       </View>
-//     )
-//   }
-// }
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -130,36 +109,4 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   }
 })
-
-
-
-// Realtime Database config and initialize
-
-// // pluck values from your 'GoogleService-Info.plist'
-// const iosConfig = {
-//   clientId: '13346713522-bqaa2ecoq7hi7aa234c0rbmgmn0nhgab.apps.googleusercontent.com',
-//   appId: '1:13346713522:ios:f8c1c98293c109bc',
-//   apiKey: 'AIzaSyD4_pWbns98wGKYxeA3ZDb8K4x6KDdgZ_o',
-//   databaseURL: 'https://monitor-3f707.firebaseio.com',
-//   storageBucket: 'monitor-3f707.appspot.com',
-//   messagingSenderId: '13346713522',
-//   projectId: 'monitor-3f707',
-//   // enable persistance by adding the below flag
-//   persistence: true,
-// }
-
-// const androidConfig = {
-//   client_id: '13346713522-mq9k30ebmeic4rua8da9k171l5vrj6o6.apps.googleusercontent.com',
-//   appId: '1:13346713522:android:f8c1c98293c109bc',
-//   apiKey: 'AIzaSyALCMxx3iL3vm8VbAIYzzLATrcDxlnspQo',
-//   databaseURL: 'https://monitor-3f707.firebaseio.com',
-//   storageBucket: 'monitor-3f707.appspot.com',
-//   messagingSenderId: '13346713522',
-//   projectId: 'monitor-3f707',
-//   // enable persistance by adding the below flag
-//   persistence: true,
-// }
-
-// how to set up a stack navigator for each tab:
-// https://reactnavigation.org/docs/en/tab-based-navigation.html
 

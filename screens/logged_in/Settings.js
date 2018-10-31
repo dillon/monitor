@@ -14,13 +14,13 @@ export default class Settings extends React.Component {
             {errorMessage}
           </Text>}
         <Text>
-          Hi {currentUser && currentUser.email}
+          {currentUser && currentUser.email}
         </Text>
         <Text>
           Your uid is {currentUser && currentUser.uid}
         </Text>
         <Text>
-          Your theme is {theme && theme}
+          theme is {theme && theme}
         </Text>
         <Button title='Sign Out' onPress={handleSignOut} />
       </View>
