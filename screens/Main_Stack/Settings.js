@@ -4,6 +4,7 @@ import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react
 
 
 export default class Settings extends React.Component {
+  
   render() {
     const { currentUser, errorMessage, theme, wallets, handleSignOut } = this.props.screenProps
     return (
@@ -17,10 +18,10 @@ export default class Settings extends React.Component {
           {currentUser && currentUser.email}
         </Text>
         <Text>
-          Your uid is {currentUser && currentUser.uid}
+          UID: {currentUser && currentUser.uid}
         </Text>
         <Text>
-          theme is {theme && theme}
+          Theme: {theme && theme}
         </Text>
         <Button title='Sign Out' onPress={handleSignOut} />
       </View>

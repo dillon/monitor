@@ -8,9 +8,9 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 
 import firebase from 'react-native-firebase'
 
-import Transactions from './logged_in/Transactions'
-import Wallets from './logged_in/Wallets'
-import Settings from './logged_in/Settings'
+import Transactions from './Main_Stack/Transactions'
+import Wallets from './Main_Stack/Wallets'
+import Settings from './Main_Stack/Settings'
 
 
 
@@ -39,9 +39,11 @@ export default class Main extends React.Component {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
     // TODO: make data persistent instead of checking the theme...
-    if (!this.state.currentUser) {
-      this.readUserData(currentUser.uid)
-    }
+    
+    // THIS WAS CAUSING UNHANDLED PROMISE
+    // if (!this.state.currentUser) {
+    //   this.readUserData(currentUser.uid)
+    // }
   }
 
   readUserData = async (uid) => {
