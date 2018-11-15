@@ -7,7 +7,9 @@ once it is Loading Dependency Graph, in a seperate terminal window, run `yarn ru
 
 ## APIs
 
-[dagger](https://matic.network/dagger/)
+[blockcypher](https://api.blockcypher.com)
+click [here](http://api.blockcypher.com/v1/tokens/71e0a433f8544817bafda2b345f17d72) to check my token's usage
+(delete above token link if README is public)
 
 [etherscan](https://etherscan.io/apis#accounts) via [etherscan-api (a node.js wrapper)](https://sebs.github.io/etherscan-api/)
 
@@ -20,4 +22,3 @@ once it is Loading Dependency Graph, in a seperate terminal window, run `yarn ru
 [receiving notifications](https://rnfirebase.io/docs/v4.3.x/notifications/receiving-notifications)
 
 ## Realtime Database structure
-
