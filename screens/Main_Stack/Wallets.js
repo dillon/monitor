@@ -89,6 +89,7 @@ export default class Wallets extends React.Component {
         <TextInput
           style={styles.textInput}
           autoCapitalize="sentences"
+          autoCorrect={false}
           placeholder="nickname..."
           onChangeText={newNickname => this.setState({ newNickname })}
           value={this.state.newNickname}
