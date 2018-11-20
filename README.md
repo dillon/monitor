@@ -7,7 +7,8 @@ once it is Loading Dependency Graph, in a seperate terminal window, run `yarn ru
 
 ## APIs
 
-[blockcypher](https://api.blockcypher.com)
+[blockcypher ethereum](https://www.blockcypher.com/dev/ethereum/)
+[blockcypher bitcoin](https://www.blockcypher.com/dev/bitcoin/)
 click [here](http://api.blockcypher.com/v1/tokens/71e0a433f8544817bafda2b345f17d72) to check my token's usage
 (delete above token link if README is public)
 

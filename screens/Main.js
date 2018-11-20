@@ -40,10 +40,10 @@ export default class Main extends React.Component {
     this.setState({ currentUser })
     // TODO: make data persistent instead of checking the theme...
     
-    // THIS WAS CAUSING UNHANDLED PROMISE
-    // if (!this.state.currentUser) {
-    //   this.readUserData(currentUser.uid)
-    // }
+    // ENABLING THIS IS CAUSING UNHANDLED PROMISE, but it also allows user data to be read
+    if (!this.state.currentUser) {
+      this.readUserData(currentUser.uid)
+    }
   }
 
   readUserData = async (uid) => {

@@ -10,7 +10,7 @@ export default class SignUp extends React.Component {
 
     handleSignUp = () => {
         firebase.auth()
-            .createUserAndRetrieveDataWithEmailAndPassword(
+            .createUserWithEmailAndPassword(
                 this.state.email,
                 this.state.password
             )

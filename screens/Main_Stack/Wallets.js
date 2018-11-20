@@ -66,8 +66,8 @@ export default class Wallets extends React.Component {
 
 
   render() {
-    const { currentUser, errorMessage, theme,/* wallets,*/ handleSignOut, handleErrorMessage, addAddress } = this.props.screenProps
-    wallets = [{ address: '0x04fea4947baba4A5D0aCFAAf1Cb912b7D4670D49', nickname: 'primablock' }, { address: '0x05rat4857dada4A5D0aCFAAf1Cb912b1D2351A75', nickname: 'dillon\'s wallet' }]
+    const { currentUser, errorMessage, theme, wallets, handleSignOut, handleErrorMessage, addAddress } = this.props.screenProps
+    // wallets = [{ address: '0x04fea4947baba4A5D0aCFAAf1Cb912b7D4670D49', nickname: 'primablock' }, { address: '0x05rat4857dada4A5D0aCFAAf1Cb912b1D2351A75', nickname: 'dillon\'s wallet' }]
     return (
       <View style={StyleSheet.absoluteFill}>
 
