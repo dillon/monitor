@@ -49,7 +49,7 @@ export default class Main extends React.Component {
   readUserData = async (uid) => {
     firebase.database().ref(`users/${uid}`).on('value', (snapshot) => {
       const val = snapshot.val()
-      const walletsArray = Object.keys(val.wallets).map(i => val.wallets[i]);
+      const walletsArray = val.wallets ? Object.keys(val.wallets).map(i => val.wallets[i]): undefined;
       this.setState({ theme: val.theme, wallets: walletsArray })
     }).catch(error => this.setState({ errorMessage: error.message }))
   }

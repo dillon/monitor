@@ -24,7 +24,7 @@ export default class Wallets extends React.Component {
             'Details',
             { title: item.title, img: item.img, id: item.imdbID })
         }}
-        style={styles.wallet}
+        style={item.isFetchingTransactions ? styles.walletStillFetching : styles.walletDoneFetching}
       >
         <View style={styles.walletColumns}>
           <View>
@@ -53,7 +53,8 @@ export default class Wallets extends React.Component {
     const wallet = {
       address: newAddress,
       nickname: newNickname,
-      createdOn: new Date()
+      createdOn: new Date(),
+      isFetchingTransactions: true
     }
 
     if (isWallet(wallet)) {
@@ -132,9 +133,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginTop: 40
   },
-  wallet: {
+  walletDoneFetching: {
     padding: 10,
     // backgroundColor: 'lightgreen',
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    marginBottom: -1
+  },
+  walletStillFetching: {
+    padding: 10,
+    color: 'grey',
+    backgroundColor: 'lightgrey',
     borderColor: 'lightgrey',
     borderWidth: 1,
     marginBottom: -1
