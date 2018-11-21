@@ -28,7 +28,7 @@ export default class Wallets extends React.Component {
       >
         <View style={styles.walletColumns}>
           <View>
-            <Text style={styles.nickname}>{item.nickname}{item.updated && ' updated!'}</Text>
+            <Text style={styles.nickname}>{item.nickname}{item.updated && ' updated!'}{item.transactions && ' (' + item.transactions.length + ')'}</Text>
             <Text style={styles.address}>{item.address}</Text>
           </View>
           <TouchableOpacity style={styles.copyButton}>
@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
   },
   walletStillFetching: {
     padding: 10,
-    color: 'grey',
     backgroundColor: 'lightgrey',
     borderColor: 'lightgrey',
     borderWidth: 1,
@@ -155,10 +154,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   nickname: {
-    fontSize: 16,
+    fontSize: 12,
   },
   address: {
-    fontSize: 12,
+    fontSize: 10,
     color: 'darkgrey'
   },
   copyButton: {
