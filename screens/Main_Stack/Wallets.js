@@ -106,8 +106,8 @@ export default class Wallets extends React.Component {
           <FlatList
             removeClippedSubviews={false}
             style={{ flex: 1, borderColor: 'red', borderWidth: 1, marginTop: 100 }}
-            // wallets for testing:
             data={wallets}
+            keyExtractor={x => x.address}
             renderItem={this.renderItem}
             keyExtractor={(wallet) => wallet.address}
           >

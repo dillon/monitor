@@ -32,14 +32,15 @@ export default class Main extends React.Component {
     currentUser: null,
     errorMessage: null,
     theme: null,
-    wallets: null
+    wallets: null,
+    transactions: null,
   }
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
     // TODO: make data persistent instead of checking the theme...
-    
+
     // ENABLING THIS IS CAUSING UNHANDLED PROMISE, but it also allows user data to be read
     if (!this.state.currentUser) {
       this.readUserData(currentUser.uid)
@@ -49,8 +50,21 @@ export default class Main extends React.Component {
   readUserData = async (uid) => {
     firebase.database().ref(`users/${uid}`).on('value', (snapshot) => {
       const val = snapshot.val()
-      const walletsArray = val.wallets ? Object.keys(val.wallets).map(i => val.wallets[i]): undefined;
-      this.setState({ theme: val.theme, wallets: walletsArray })
+      const walletsArray = val.wallets ? Object.keys(val.wallets).map(i => val.wallets[i]) : undefined;
+      const transactionsArray = [];
+      if (walletsArray) {
+        walletsArray.map((wallet) => {
+          if (wallet.transactions && wallet.transactions.length >= 0) {
+            wallet.transactions.map((tx) => {
+              transactionsArray.push(tx)
+            })
+          }
+        })
+      }
+      transactionsArray.sort(function(a,b) {
+        return b.timeStamp - a.timeStamp
+      })
+      this.setState({ theme: val.theme, wallets: walletsArray, transactions: transactionsArray })
     }).catch(error => this.setState({ errorMessage: error.message }))
   }
 
@@ -84,7 +98,7 @@ export default class Main extends React.Component {
   }
 
   render() {
-    const { currentUser, errorMessage, theme, wallets } = this.state
+    const { currentUser, errorMessage, theme, wallets, transactions } = this.state
     const { handleSignOut, handleErrorMessage, addAddress } = this
     return (
       <MainNavigation
@@ -93,6 +107,7 @@ export default class Main extends React.Component {
           errorMessage,
           theme,
           wallets,
+          transactions,
           handleSignOut,
           handleErrorMessage,
           addAddress
