@@ -1,5 +1,5 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 
 // import the different screens
 import Loading from './screens/Loading'
@@ -12,7 +12,7 @@ import PasswordReset from './screens/PasswordReset'
 
 
 // create our app's navigation stack
-const App = createSwitchNavigator(
+const AppNavigator = createSwitchNavigator(
   {
     Loading,
     SignUp,
@@ -24,5 +24,6 @@ const App = createSwitchNavigator(
     initialRouteName: 'Loading'
   }
 )
+const AppContainer = createAppContainer(AppNavigator)
 
-export default App
+export default AppContainer
