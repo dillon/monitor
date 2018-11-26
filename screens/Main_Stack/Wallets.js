@@ -30,6 +30,7 @@ export default class Wallets extends React.Component {
           <View>
             <Text style={styles.nickname}>{item.nickname}{item.updated && ' updated!'}{item.transactions && ' (' + item.transactions.length + ')'}</Text>
             <Text style={styles.address}>{item.address}</Text>
+            <Text style={styles.address}>{item.webhookId && item.webhookId}</Text>
           </View>
           <TouchableOpacity style={styles.copyButton}>
             <View onPress={() => console.log('this should copy the wallets address')}></View>
