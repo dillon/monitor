@@ -12,7 +12,7 @@ export default class Login extends React.Component {
         super(props)
         this.state = { email: '', password: '', errorMessage: null }
     }
-
+ 
     handleReset = () => {
         const { email } = this.state
         firebase.auth()
