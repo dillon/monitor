@@ -9,7 +9,7 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import firebase from 'react-native-firebase'
 
 import Transactions from './Main_Stack/Transactions'
-import Wallets from './Main_Stack/Wallets'
+import WalletsRouter from './Main_Stack/WalletsRouter'
 import Settings from './Main_Stack/Settings'
 
 
@@ -20,7 +20,7 @@ import Settings from './Main_Stack/Settings'
 
 const MainNavigation = createBottomTabNavigator({
   Transactions: Transactions,
-  Wallets: Wallets,
+  Wallets: WalletsRouter,
   Settings: Settings
 });
 
@@ -75,7 +75,7 @@ export default class MainRouter extends React.Component {
           return b.timeStamp - a.timeStamp
         })
         this.setState({ theme: val.theme, wallets: walletsArray, transactions: transactionsArray })
-      }).catch(error => this.setState({ errorMessage: error.message }))
+      })
   }
 
   handleSignOut = () => {

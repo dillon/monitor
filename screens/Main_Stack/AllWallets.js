@@ -2,10 +2,12 @@ import React from 'react'
 
 import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
+import { createStackNavigator } from 'react-navigation'
+
 import { isWallet } from '../../utils/isAddress'
 
 
-export default class Wallets extends React.Component {
+export default class AllWallets extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -21,8 +23,8 @@ export default class Wallets extends React.Component {
         underlayColor='#ddd'
         onPress={() => {
           this.props.navigation.navigate(
-            'Details',
-            { title: item.title, img: item.img, id: item.imdbID })
+            'SingleWallet',
+            { wallet: item, deleteWallet: this.deleteWallet })
         }}
         style={item.isFetchingTransactions ? styles.walletStillFetching : styles.walletDoneFetching}
       >
