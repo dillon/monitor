@@ -5,7 +5,7 @@ import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 import Loading from './screens/Loading'
 import SignUp from './screens/SignUp'
 import Login from './screens/Login'
-import Main from './screens/Main'
+import MainRouter from './screens/MainRouter'
 import PasswordReset from './screens/PasswordReset'
 
 
@@ -17,7 +17,7 @@ const AppNavigator = createSwitchNavigator(
     Loading,
     SignUp,
     Login,
-    Main,
+    MainRouter,
     PasswordReset
   },
   {

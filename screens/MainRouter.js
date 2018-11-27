@@ -1,5 +1,5 @@
 
-// Main.js
+// MainRouter.js
 import React from 'react'
 
 import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react-native'
@@ -25,7 +25,7 @@ const MainNavigation = createBottomTabNavigator({
 });
 
 
-export default class Main extends React.Component {
+export default class MainRouter extends React.Component {
   static router = MainNavigation.router;
   constructor(props) {
     super(props);
