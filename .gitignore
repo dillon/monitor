@@ -65,3 +65,7 @@ buck-out/
 # RNFirebaseStarter
 yarn.lock
 package-lock.json
+
+
+# My own private notes
+PRIVATE_NOTES.md
