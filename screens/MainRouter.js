@@ -49,7 +49,6 @@ export default class MainRouter extends React.Component {
       // this.setState({ currentUser })})
       this.setState({ currentUser })
       this.readUserData(currentUser.uid)
-      // .catch((error) => { this.setState({ errorMessage: error.message }) })
     }
   }
 
@@ -58,9 +57,11 @@ export default class MainRouter extends React.Component {
       .on('value', (snapshot) => {
         const val = snapshot.val()
         const walletsArray = val.wallets ? Object.keys(val.wallets).map(i => val.wallets[i]) : undefined;
-        walletsArray.sort(function (a, b) {
-          return new Date(b.createdOn) - new Date(a.createdOn)
-        })
+        if (walletsArray) {
+          walletsArray.sort(function (a, b) {
+            return new Date(b.createdOn) - new Date(a.createdOn)
+          })
+        }
         const transactionsArray = [];
         if (walletsArray) {
           walletsArray.map((wallet) => {
@@ -82,7 +83,7 @@ export default class MainRouter extends React.Component {
     firebase.auth()
       .signOut()
       .then(() => this.props.navigation.navigate('Login'))
-      .catch(error => this.setState({ errorMessage: error.message }))
+      .catch(error => this.handleErrorMessage(error.message))
   }
 
   handleErrorMessage = (errorMessage) => {
@@ -97,19 +98,34 @@ export default class MainRouter extends React.Component {
         // check if duplicate
         if (snapshot.exists()) {
           // if duplicate, set error message
-          this.setState({ errorMessage: 'address already exists' })
+          this.handleErrorMessage('address already exists')
         } else {
           // if not duplicate, push to database
-          firebase.database().ref(`users/${uid}/wallets`).push(wallet, (data, err) => {
-            if (err) throw new Error(err)
-          }).catch((error) => this.setState({ errorMessage: error.message }))
+          firebase.database().ref(`users/${uid}/wallets`)
+            .push(wallet, (data, err) => {
+              if (err) throw new Error(err)
+            }).catch((error) => this.handleErrorMessage(error.message))
         }
       });
   }
 
+  deleteAddress = async (address) => {
+    const { uid } = this.state.currentUser
+    firebase.database().ref(`users/${uid}/wallets`).orderByChild('address').equalTo(address).limitToFirst(1)
+      .once('value', snapshot => {
+        if (snapshot.exists()) {
+          snapshot.forEach(function (child) {
+            child.ref.remove();
+          });
+        } else {
+          this.handleErrorMessage('could not delete wallet: does not exist')
+        }
+      })
+  }
+
   render() {
     const { currentUser, errorMessage, theme, wallets, transactions } = this.state
-    const { handleSignOut, handleErrorMessage, addAddress } = this
+    const { handleSignOut, handleErrorMessage, addAddress, deleteAddress } = this
     return (
       <MainNavigation
         screenProps={{
@@ -120,7 +136,8 @@ export default class MainRouter extends React.Component {
           transactions,
           handleSignOut,
           handleErrorMessage,
-          addAddress
+          addAddress,
+          deleteAddress
         }}
         navigation={this.props.navigation}
       />

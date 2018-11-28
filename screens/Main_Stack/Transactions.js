@@ -55,7 +55,7 @@ export default class Transactions extends React.Component {
             style={{ flex: 1, borderColor: 'blue', borderWidth: 1, marginTop: 40 }}
             data={transactions}
             renderItem={this.renderItem}
-            keyExtractor={(tx) => tx.txHash + tx.type}
+            keyExtractor={(tx, i) => tx.txHash + i}
           >
           </FlatList>
         }

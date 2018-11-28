@@ -20,14 +20,10 @@ export default class WalletsRouter extends React.Component {
     super(props)
   }
 
-  deleteWallet = (wallet) => {
-    console.log('this should delete a wallet')
-  }
-
   render() {
     const { currentUser, errorMessage,
       theme, wallets, transactions,
-      handleErrorMessage, addAddress } = this.props.screenProps
+      handleErrorMessage, addAddress, deleteAddress } = this.props.screenProps
     return (
       <WalletsNavigation
         screenProps={{
@@ -37,7 +33,8 @@ export default class WalletsRouter extends React.Component {
           wallets,
           transactions,
           handleErrorMessage,
-          addAddress
+          addAddress,
+          deleteAddress
         }}
         navigation={this.props.navigation}
       />

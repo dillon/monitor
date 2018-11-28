@@ -28,6 +28,7 @@
     "react-native": "0.57.1",
     "react-native-firebase": "5.1.0",
     "react-native-gesture-handler": "^1.0.10",
+    "react-native-swipeout": "^2.3.6",
     "react-navigation": "^3.0.1"
   }
 }
