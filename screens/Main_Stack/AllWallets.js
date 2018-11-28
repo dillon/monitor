@@ -42,6 +42,7 @@ export default class AllWallets extends React.Component {
     else this.props.screenProps.handleErrorMessage('not a valid address');
   }
 
+
   renderItem = (metaItem) => {
     const { item } = metaItem
     const swipeoutBtns = [{ text: 'Delete', backgroundColor: Colors.delete, color: 'white', onPress: () => this.props.screenProps.deleteAddress(item.address) }]
@@ -64,7 +65,7 @@ export default class AllWallets extends React.Component {
               <Text style={styles.address}>{item.webhookId && item.webhookId}</Text>
             </View>
             <TouchableOpacity style={styles.copyButton}>
-              <View onPress={() => console.log('this should copy the wallets address')}></View>
+              <Button title='' onPress={() => { this.props.screenProps.writeToClipboard(item.address, 'Wallet address') }}></Button>
             </TouchableOpacity>
           </View>
         </TouchableHighlight >

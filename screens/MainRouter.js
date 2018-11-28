@@ -2,7 +2,7 @@
 // MainRouter.js
 import React from 'react'
 
-import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react-native'
+import { StyleSheet, FlatList, Button, Platform, Image, Text, View, Clipboard } from 'react-native'
 
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 
@@ -39,6 +39,10 @@ export default class MainRouter extends React.Component {
     };
   }
 
+  writeToClipboard = async (hash, name) => {
+    await Clipboard.setString(hash);
+    alert(name + ' copied to Clipboard.');
+  };
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
@@ -125,7 +129,7 @@ export default class MainRouter extends React.Component {
 
   render() {
     const { currentUser, errorMessage, theme, wallets, transactions } = this.state
-    const { handleSignOut, handleErrorMessage, addAddress, deleteAddress } = this
+    const { handleSignOut, handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this
     return (
       <MainNavigation
         screenProps={{
@@ -137,7 +141,8 @@ export default class MainRouter extends React.Component {
           handleSignOut,
           handleErrorMessage,
           addAddress,
-          deleteAddress
+          deleteAddress,
+          writeToClipboard
         }}
         navigation={this.props.navigation}
       />

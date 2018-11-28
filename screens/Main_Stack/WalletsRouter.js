@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View, Clipboard } from 'react-native'
 
 import { createStackNavigator } from 'react-navigation'
 
@@ -23,7 +23,7 @@ export default class WalletsRouter extends React.Component {
   render() {
     const { currentUser, errorMessage,
       theme, wallets, transactions,
-      handleErrorMessage, addAddress, deleteAddress } = this.props.screenProps
+      handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this.props.screenProps
     return (
       <WalletsNavigation
         screenProps={{
@@ -34,7 +34,8 @@ export default class WalletsRouter extends React.Component {
           transactions,
           handleErrorMessage,
           addAddress,
-          deleteAddress
+          deleteAddress,
+          writeToClipboard
         }}
         navigation={this.props.navigation}
       />

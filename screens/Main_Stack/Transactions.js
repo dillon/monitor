@@ -33,7 +33,7 @@ export default class Transactions extends React.Component {
             <Text>other address: {item.type === 'outgoing' ? item.toAddress : item.fromAddress}</Text>
           </View>
           <TouchableOpacity style={styles.copyButton}>
-            <View onPress={() => console.log('this should copy the wallets address')}></View>
+            <Button title='' onPress={() => this.props.screenProps.writeToClipboard(item.txHash, 'Transaction hash')}></Button>
           </TouchableOpacity>
         </View>
       </TouchableHighlight >
