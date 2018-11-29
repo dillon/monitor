@@ -17,10 +17,6 @@ export default class AllWallets extends React.Component {
     }
   }
 
-  // https://github.com/dancormier/react-native-swipeout
-  // Swipeout to add flatlist item "swipe-to-" menu functionality
-
-
   handleAddAddress = () => {
     let { newAddress, newNickname } = this.state
 
@@ -76,7 +72,6 @@ export default class AllWallets extends React.Component {
 
   render() {
     const { currentUser, errorMessage, theme, wallets, handleSignOut, handleErrorMessage, addAddress, deleteAddress } = this.props.screenProps
-    // wallets = [{ address: '0x04fea4947baba4A5D0aCFAAf1Cb912b7D4670D49', nickname: 'primablock' }, { address: '0x05rat4857dada4A5D0aCFAAf1Cb912b1D2351A75', nickname: 'dillon\'s wallet' }]
     return (
       <View style={StyleSheet.absoluteFill}>
 

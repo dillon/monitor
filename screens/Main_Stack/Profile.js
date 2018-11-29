@@ -3,13 +3,13 @@ import React from 'react'
 import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react-native'
 
 
-export default class Settings extends React.Component {
+export default class Profile extends React.Component {
   
   render() {
     const { currentUser, errorMessage, theme, wallets, handleSignOut } = this.props.screenProps
     return (
       <View style={styles.container}>
-        <Text>Settings</Text>
+        <Text>Profile</Text>
         {errorMessage &&
           <Text style={{ color: 'red' }}>
             {errorMessage}

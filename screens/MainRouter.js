@@ -10,7 +10,7 @@ import firebase from 'react-native-firebase'
 
 import Transactions from './Main_Stack/Transactions'
 import WalletsRouter from './Main_Stack/WalletsRouter'
-import Settings from './Main_Stack/Settings'
+import Profile from './Main_Stack/Profile'
 
 
 
@@ -21,7 +21,7 @@ import Settings from './Main_Stack/Settings'
 const MainNavigation = createBottomTabNavigator({
   Transactions: Transactions,
   Wallets: WalletsRouter,
-  Settings: Settings
+  Profile: Profile
 });
 
 
