@@ -24,11 +24,13 @@
   },
   "dependencies": {
     "crypto-js": "^3.1.9-1",
+    "moment": "^2.22.2",
     "react": "16.5.0",
     "react-native": "0.57.1",
     "react-native-firebase": "5.1.0",
     "react-native-gesture-handler": "^1.0.10",
     "react-native-swipeout": "^2.3.6",
+    "react-native-vector-icons": "^6.1.0",
     "react-navigation": "^3.0.1"
   }
 }

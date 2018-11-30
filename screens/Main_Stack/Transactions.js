@@ -11,8 +11,8 @@ export default class Transactions extends React.Component {
   }
 
   renderItem = (metaItem) => {
-    const wallet = metaItem.item
-    return (<TransactionListItem navigation={this.props.navigation} wallet={wallet}/>)
+    const { item } = metaItem
+    return (<TransactionListItem navigation={this.props.navigation} item={item} />)
   }
 
   render() {

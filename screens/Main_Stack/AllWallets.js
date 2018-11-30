@@ -6,7 +6,7 @@ import Swipeout from 'react-native-swipeout';
 
 import { isWallet } from '../../utils/isAddress'
 import { Colors } from '../../design/Constants'
-
+import shortenHash from '../../utils/shortenHash'
 
 export default class AllWallets extends React.Component {
   constructor(props) {
@@ -21,7 +21,7 @@ export default class AllWallets extends React.Component {
     let { newAddress, newNickname } = this.state
 
     // Make sure nickname isn't blank, or isn't all spaces. If it is, replace it with its address.
-    newNickname = newNickname.replace(/\s/g, '').length === 0 ? newAddress : newNickname
+    newNickname = newNickname.replace(/\s/g, '').length === 0 ? shortenHash(newAddress) : newNickname
 
     const wallet = {
       address: newAddress,
@@ -100,7 +100,7 @@ export default class AllWallets extends React.Component {
           returnKeyType='done'
           onSubmitEditing={this.handleAddAddress}
           blurOnSubmit={true}
-          maxLength={42}
+          maxLength={20}
         ></TextInput>
 
         <Button title="Add" onPress={this.handleAddAddress} />
