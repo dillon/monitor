@@ -3,6 +3,7 @@ import React from 'react'
 import { StyleSheet, FlatList, TouchableHighlight, TouchableOpacity, Button, Platform, Image, Text, View } from 'react-native'
 
 import TransactionListItem from '../components/TransactionListItem'
+import { Colors } from '../../design/Constants';
 
 export default class Transactions extends React.Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class Transactions extends React.Component {
   }
 
   render() {
-    const { currentUser, errorMessage, theme, wallets, transactions, handleSignOut, addAddress } = this.props.screenProps
+    const { currentUser, errorMessage, wallets, transactions, handleSignOut, addAddress } = this.props.screenProps
     return (
       <View style={StyleSheet.absoluteFill}>
         {errorMessage &&
@@ -27,11 +28,15 @@ export default class Transactions extends React.Component {
           <FlatList
             showsVerticalScrollIndicator={false}
             removeClippedSubviews={false}
-            style={{ flex: 1, borderColor: 'blue', borderWidth: 1, marginTop: 40 }}
+            style={{ flex: 1 }}
             data={transactions}
             renderItem={this.renderItem}
             keyExtractor={(tx, i) => tx.txHash + i}
+            backgroundColor={Colors.white}
           >
+            {!transactions &&
+              <View style={{ backgroundColor: Colors.white }} />
+            }
           </FlatList>
         }
       </View>

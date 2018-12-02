@@ -22,14 +22,13 @@ export default class WalletsRouter extends React.Component {
 
   render() {
     const { currentUser, errorMessage,
-      theme, wallets, transactions,
+      wallets, transactions,
       handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this.props.screenProps
     return (
       <WalletsNavigation
         screenProps={{
           currentUser,
           errorMessage,
-          theme,
           wallets,
           transactions,
           handleErrorMessage,

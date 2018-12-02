@@ -2,11 +2,33 @@ import React from 'react'
 
 import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
+import FeatherIcon from 'react-native-vector-icons/Feather'
+
+import { Colors } from '../../design/Constants'
+
 export default class SingleWallet extends React.Component {
   constructor(props) {
     super(props);
-    // Don't call this.setState() here!
   };
+
+  static navigationOptions = ({ navigation }) => {
+    const wallet = navigation.getParam('wallet', 'wallet')
+    return {
+      title: wallet.nickname,
+      headerStyle: {
+        backgroundColor: Colors.primary,
+        color: Colors.white,
+        elevation: 0,
+        shadowOpacity: 0,
+        borderBottomWidth: 0
+      },
+      headerTintColor: Colors.white,
+      headerTitleStyle: {
+        color: Colors.white,
+      },
+    };
+  };
+
   render() {
     const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
     return (
@@ -17,8 +39,10 @@ export default class SingleWallet extends React.Component {
           <Text style={styles.address}>{wallet.webhookId && wallet.webhookId}</Text>
         </View>
         <TouchableOpacity style={styles.copyButton}>
-          <View onPress={() => console.log('this should copy the wallets address')}></View>
-        </TouchableOpacity>
+              <View onPress={() => { this.props.screenProps.writeToClipboard(item.address, 'Wallet address') }}>
+                <FeatherIcon name='copy' color={Colors.primary} size={15}/>
+              </View>
+            </TouchableOpacity>
       </View>
 
     )
@@ -45,14 +69,14 @@ const styles = StyleSheet.create({
   walletDoneFetching: {
     padding: 10,
     // backgroundColor: 'lightgreen',
-    borderColor: 'lightgrey',
+    borderColor: Colors.grey,
     borderWidth: 1,
     marginBottom: -1
   },
   walletStillFetching: {
     padding: 10,
-    backgroundColor: 'lightgrey',
-    borderColor: 'lightgrey',
+    backgroundColor: Colors.grey,
+    borderColor: Colors.grey,
     borderWidth: 1,
     marginBottom: -1
   },
@@ -67,14 +91,18 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 10,
-    color: 'darkgrey'
+    color: Colors.grey
   },
   copyButton: {
     width: 32,
     height: 32,
     borderRadius: 50,
-    backgroundColor: '#aaccff',
-    borderColor: 'darkgrey',
-    borderWidth: 1
-  }
+    backgroundColor: Colors.grey,
+    borderColor: Colors.grey,
+    borderWidth: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  },
 })

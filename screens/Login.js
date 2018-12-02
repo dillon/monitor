@@ -28,11 +28,11 @@ export default class Login extends React.Component {
       <View style={styles.container}>
         <Text>Login</Text>
         {confirmReset &&
-          <Text style={{ color: 'darkgreen' }}>
+          <Text style={{ color: Colors.green }}>
             {confirmReset}
           </Text>}
         {this.state.errorMessage &&
-          <Text style={{ color: 'red' }}>
+          <Text style={{ color: Colors.red }}>
             {this.state.errorMessage}
           </Text>}
         <TextInput
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   textInput: {
     padding: 8,
     width: '90%',
-    borderColor: 'gray',
+    borderColor: Colors.grey,
     borderWidth: 1,
     marginTop: 8
   },

@@ -11,6 +11,7 @@ import firebase from 'react-native-firebase'
 import Transactions from './Main_Stack/Transactions'
 import WalletsRouter from './Main_Stack/WalletsRouter'
 import Profile from './Main_Stack/Profile'
+import { Colors } from '../design/Constants';
 
 
 
@@ -18,11 +19,25 @@ import Profile from './Main_Stack/Profile'
 // https://reactnavigation.org/docs/en/tab-based-navigation.html
 
 
-const MainNavigation = createBottomTabNavigator({
-  Transactions: Transactions,
-  Wallets: WalletsRouter,
-  Profile: Profile
-});
+const MainNavigation = createBottomTabNavigator(
+  {
+    Transactions: Transactions,
+    Wallets: WalletsRouter,
+    Profile: Profile
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: Colors.black,
+      inactiveTintColor: Colors.grey,
+      // labelStyle: {
+      //   fontSize: 12,
+      // },
+      style: {
+        backgroundColor: Colors.white,
+      },
+    }
+  }
+);
 
 
 export default class MainRouter extends React.Component {
@@ -33,7 +48,6 @@ export default class MainRouter extends React.Component {
     this.state = {
       currentUser: null,
       errorMessage: null,
-      theme: null,
       wallets: null,
       transactions: null,
     };
@@ -46,11 +60,7 @@ export default class MainRouter extends React.Component {
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
-    // TODO: make data persistent instead of checking the theme...
-
-    // ENABLING THIS IS CAUSING UNHANDLED PROMISE, but it also allows user data to be read
     if (!this.state.currentUser) {
-      // this.setState({ currentUser })})
       this.setState({ currentUser })
       this.readUserData(currentUser.uid)
     }
@@ -79,7 +89,7 @@ export default class MainRouter extends React.Component {
         transactionsArray.sort(function (a, b) {
           return b.timeStamp - a.timeStamp
         })
-        this.setState({ theme: val.theme, wallets: walletsArray, transactions: transactionsArray })
+        this.setState({ wallets: walletsArray, transactions: transactionsArray })
       })
   }
 
@@ -128,14 +138,13 @@ export default class MainRouter extends React.Component {
   }
 
   render() {
-    const { currentUser, errorMessage, theme, wallets, transactions } = this.state
+    const { currentUser, errorMessage, wallets, transactions } = this.state
     const { handleSignOut, handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this
     return (
       <MainNavigation
         screenProps={{
           currentUser,
           errorMessage,
-          theme,
           wallets,
           transactions,
           handleSignOut,

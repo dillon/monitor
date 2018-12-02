@@ -6,7 +6,7 @@ import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react
 export default class Profile extends React.Component {
   
   render() {
-    const { currentUser, errorMessage, theme, wallets, handleSignOut } = this.props.screenProps
+    const { currentUser, errorMessage, wallets, handleSignOut } = this.props.screenProps
     return (
       <View style={styles.container}>
         <Text>Profile</Text>
@@ -19,9 +19,6 @@ export default class Profile extends React.Component {
         </Text>
         <Text>
           UID: {currentUser && currentUser.uid}
-        </Text>
-        <Text>
-          Theme: {theme && theme}
         </Text>
         <Button title='Sign Out' onPress={handleSignOut} />
       </View>

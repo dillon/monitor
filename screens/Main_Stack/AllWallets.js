@@ -1,12 +1,14 @@
 import React from 'react'
 
-import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
+import { StyleSheet, TouchableHighlight, StatusBar, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
-import Swipeout from 'react-native-swipeout';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 
 import { isWallet } from '../../utils/isAddress'
 import { Colors } from '../../design/Constants'
 import shortenHash from '../../utils/shortenHash'
+import WalletListItem from '../components/WalletListItem'
 
 export default class AllWallets extends React.Component {
   constructor(props) {
@@ -14,8 +16,25 @@ export default class AllWallets extends React.Component {
     this.state = {
       newAddress: '',
       newNickname: '',
+      showTextInput: false,
     }
   }
+  static navigationOptions = {
+    title: 'Wallets',
+    headerTintColor: Colors.white,
+    headerTitleStyle: {
+      color: Colors.white,
+    },
+    headerStyle: {
+      backgroundColor: Colors.primary,
+      color: Colors.white,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    },
+
+
+  };
 
   handleAddAddress = () => {
     let { newAddress, newNickname } = this.state
@@ -38,77 +57,97 @@ export default class AllWallets extends React.Component {
     else this.props.screenProps.handleErrorMessage('not a valid address');
   }
 
+  navigateToSingleWallet = (wallet) => {
+    this.props.navigation.navigate(
+      'SingleWallet',
+      { wallet: wallet, deleteWallet: this.props.deleteWallet })
+  }
+
 
   renderItem = (metaItem) => {
     const { item } = metaItem
-    const swipeoutBtns = [{ text: 'Delete', backgroundColor: Colors.delete, color: 'white', onPress: () => this.props.screenProps.deleteAddress(item.address) }]
-
-    return (
-      <Swipeout backgroundColor='white' right={swipeoutBtns}>
-        <TouchableHighlight
-          underlayColor='#ddd'
-          onPress={() => {
-            this.props.navigation.navigate(
-              'SingleWallet',
-              { wallet: item, deleteWallet: this.deleteWallet })
-          }}
-          style={item.isFetchingTransactions ? styles.walletStillFetching : styles.walletDoneFetching}
-        >
-          <View style={styles.walletColumns}>
-            <View>
-              <Text style={styles.nickname}>{item.nickname}{item.updated && ' updated!'}{item.transactions && ' (' + item.transactions.length + ')'}</Text>
-              <Text style={styles.address}>{item.address}</Text>
-              <Text style={styles.address}>{item.webhookId && item.webhookId}</Text>
-            </View>
-            <TouchableOpacity style={styles.copyButton}>
-              <Button title='' onPress={() => { this.props.screenProps.writeToClipboard(item.address, 'Wallet address') }}></Button>
-            </TouchableOpacity>
-          </View>
-        </TouchableHighlight >
-      </Swipeout>
-
-    )
+    return <WalletListItem navigateToSingleWallet={this.navigateToSingleWallet} wallet={item} deleteAddress={this.props.screenProps.deleteAddress}/>
   }
 
   render() {
-    const { currentUser, errorMessage, theme, wallets, handleSignOut, handleErrorMessage, addAddress, deleteAddress } = this.props.screenProps
+    const { currentUser, errorMessage, wallets, handleSignOut, handleErrorMessage, addAddress, deleteAddress } = this.props.screenProps
     return (
       <View style={StyleSheet.absoluteFill}>
-
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="add an address..."
-          onChangeText={newAddress => this.setState({ newAddress })}
-          value={this.state.newAddress}
-          returnKeyType='done'
-          onSubmitEditing={this.handleAddAddress}
-          blurOnSubmit={true}
-          maxLength={42}
-        ></TextInput>
-        {errorMessage &&
-          <Text style={{ color: 'red' }}>
-            {errorMessage}
-          </Text>}
-        <TextInput
-          style={styles.textInput}
-          autoCapitalize="sentences"
-          autoCorrect={false}
-          placeholder="nickname..."
-          onChangeText={newNickname => this.setState({ newNickname })}
-          value={this.state.newNickname}
-          returnKeyType='done'
-          onSubmitEditing={this.handleAddAddress}
-          blurOnSubmit={true}
-          maxLength={20}
-        ></TextInput>
-
-        <Button title="Add" onPress={this.handleAddAddress} />
-
+        {/* <StatusBar
+          backgroundColor="blue"
+          barStyle="light-content"
+        /> */}
+        <View style={{ backgroundColor: Colors.primary }}>
+          {!this.state.showTextInput &&
+            <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', margin: 10 }}>
+              <Icon name='pluscircle' size={35} color={Colors.grey} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+            </View>
+          }
+          {this.state.showTextInput &&
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', margin: 10 }}>
+              <TextInput
+                style={{
+                  padding: 8,
+                  borderColor: Colors.white,
+                  borderWidth: 1,
+                  borderRadius: 5,
+                  flex: 1
+                }}
+                placeholderTextColor={Colors.grey}
+                autoCapitalize="none"
+                color={Colors.white}
+                placeholder="0x..."
+                onChangeText={newAddress => this.setState({ newAddress })}
+                value={this.state.newAddress}
+                returnKeyType='done'
+                onSubmitEditing={this.handleAddAddress}
+                blurOnSubmit={true}
+                maxLength={42}
+              ></TextInput>
+              <Icon style={{ marginLeft: 10 }} name='minuscircleo' size={35} color={Colors.grey} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+            </View>
+          }
+          {this.state.showTextInput &&
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline' }}>
+              <TextInput
+                style={{
+                  padding: 8,
+                  borderColor: Colors.white,
+                  borderWidth: 1,
+                  marginLeft: 10,
+                  marginRight: 0,
+                  marginBottom: 10,
+                  borderRadius: 5,
+                  flex: 1
+                }}
+                placeholderTextColor={Colors.grey}
+                autoCapitalize="sentences"
+                color={Colors.white}
+                autoCorrect={false}
+                placeholder="nickname..."
+                onChangeText={newNickname => this.setState({ newNickname })}
+                value={this.state.newNickname}
+                returnKeyType='done'
+                onSubmitEditing={this.handleAddAddress}
+                blurOnSubmit={true}
+                maxLength={20}
+              ></TextInput>
+              <View style={{ width: 55 }}>
+                <Button color={Colors.white} title="Add" onPress={this.handleAddAddress} />
+              </View>
+            </View>
+          }
+          {errorMessage &&
+            <Text style={{ marginLeft: 10, marginRight: 10, color: Colors.red }}>
+              {errorMessage}
+            </Text>
+          }
+        </View>
         {wallets &&
           <FlatList
+          backgroundColor={Colors.white}
             removeClippedSubviews={false}
-            style={{ flex: 1, borderColor: 'red', borderWidth: 1, marginTop: 100 }}
+            style={{ flex: 1 }}
             data={wallets}
             keyExtractor={x => x.address}
             renderItem={this.renderItem}
@@ -129,31 +168,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  textInput: {
-    padding: 8,
-    width: '100%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 40
-  },
   walletDoneFetching: {
     padding: 10,
-    // backgroundColor: 'lightgreen',
-    borderColor: 'lightgrey',
-    borderWidth: 1,
     marginBottom: -1
   },
   walletStillFetching: {
     padding: 10,
-    backgroundColor: 'lightgrey',
-    borderColor: 'lightgrey',
-    borderWidth: 1,
+    backgroundColor: Colors.grey,
     marginBottom: -1
   },
   walletColumns: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between'
   },
   nickname: {
@@ -161,14 +188,24 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 10,
-    color: 'darkgrey'
+    color: Colors.grey
   },
   copyButton: {
     width: 32,
     height: 32,
     borderRadius: 50,
-    backgroundColor: '#aaccff',
-    borderColor: 'darkgrey',
-    borderWidth: 1
+    backgroundColor: Colors.grey,
+    borderColor: Colors.grey,
+    borderWidth: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+
+  },
+  showAddAddressButton: {
+    borderRadius: 50,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

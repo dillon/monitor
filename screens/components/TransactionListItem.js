@@ -7,6 +7,7 @@ import moment from 'moment'
 import shortenHash from '../../utils/shortenHash'
 
 import Icon from 'react-native-vector-icons/Feather';
+import { Colors } from '../../design/Constants';
 
 
 export default class Transactions extends React.PureComponent {
@@ -28,29 +29,33 @@ export default class Transactions extends React.PureComponent {
       >
         <View style={styles.transactionColumn}>
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
-            <View style={styles.copyButton}>
+            <View style={styles.iconFrame}>
               {item.type === 'incoming'
                 ?
-                <Icon name='download' size={16} color='grey' />
+                <View style={{ paddingBottom: 1, paddingLeft: 1 }}>
+                  <Icon name='download' size={15} color={Colors.darkGrey} />
+                </View>
                 :
-                <Icon name='upload' size={16} color='grey' />
+                <View style={{ paddingBottom: 1, paddingLeft: 1 }}>
+                  <Icon name='upload' size={15} color={Colors.darkGrey} />
+                </View>
               }
             </View>
             <View style={{ display: 'flex', flexDirection: 'column' }}>
-              <Text style={item.type === 'incoming' ? { color: 'blue' } : { color: 'darkorange' }}>
-                {parseFloat(item.value.toFixed(8))} <Text style={{ fontWeight: '600', color: '#aaa' }}>ETH</Text>
+              <Text style={item.type === 'incoming' ? { color: Colors.green } : { color: Colors.red }}>
+                {parseFloat(item.value.toFixed(8))} <Text style={{ fontWeight: '600', color: Colors.grey }}>ETH</Text>
               </Text>
-              <Text style={{ fontWeight: '600', color: '#aaa' }}>
+              <Text style={{ fontWeight: '600', color: Colors.darkGrey }}>
                 {item.walletNickname}
               </Text>
             </View>
           </View>
           <View>
             <View style={{ display: 'flex', border: '1px solid red', flexDirection: 'column' }}>
-              <Text style={{ textAlign: 'right' }}>
+              <Text style={{ textAlign: 'right', color: Colors.black}}>
                 {date}
               </Text>
-              <Text style={{ textAlign: 'right', color: '#aaa' }}>
+              <Text style={{ textAlign: 'right', color: Colors.darkGrey }}>
                 {item.type === 'incoming' ? `from ${shortenHash(item.fromAddress)}` : `to ${shortenHash(item.toAddress)}`}
               </Text>
             </View>
@@ -66,31 +71,32 @@ const styles = StyleSheet.create({
   transaction: {
     padding: 10,
     // backgroundColor: 'lightgreen',
-    borderColor: 'lightgrey',
+    borderColor: Colors.grey,
     borderWidth: 1,
-    marginBottom: -1
+    marginBottom: -1,
+    backgroundColor: Colors.white
   },
   transactionColumn: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   nickname: {
     fontSize: 12,
   },
   address: {
     fontSize: 10,
-    color: 'darkgrey'
+    color: Colors.grey
   },
-  copyButton: {
+  iconFrame: {
     width: 32,
     height: 32,
     marginRight: 10,
     borderRadius: 50,
     // backgroundColor: '#aaccff',
-    borderColor: 'darkgrey',
+    borderColor: Colors.grey,
     borderWidth: 1,
     display: 'flex',
     alignItems: 'center',
