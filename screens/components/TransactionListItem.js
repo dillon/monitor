@@ -15,7 +15,7 @@ export default class Transactions extends React.PureComponent {
     super(props)
   }
   render() {
-    let { item } = this.props
+    let { item, showNickName } = this.props
     const date = moment(item.dateString).fromNow();
     return (
       <TouchableHighlight
@@ -45,14 +45,14 @@ export default class Transactions extends React.PureComponent {
               <Text style={item.type === 'incoming' ? { color: Colors.green } : { color: Colors.red }}>
                 {parseFloat(item.value.toFixed(8))} <Text style={{ fontWeight: '600', color: Colors.grey }}>ETH</Text>
               </Text>
-              <Text style={{ fontWeight: '600', color: Colors.darkGrey }}>
+              {showNickName && <Text style={{ fontWeight: '600', color: Colors.darkGrey }}>
                 {item.walletNickname}
-              </Text>
+              </Text>}
             </View>
           </View>
           <View>
             <View style={{ display: 'flex', border: '1px solid red', flexDirection: 'column' }}>
-              <Text style={{ textAlign: 'right', color: Colors.black}}>
+              <Text style={{ textAlign: 'right', color: Colors.black }}>
                 {date}
               </Text>
               <Text style={{ textAlign: 'right', color: Colors.darkGrey }}>

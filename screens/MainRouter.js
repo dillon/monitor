@@ -2,7 +2,7 @@
 // MainRouter.js
 import React from 'react'
 
-import { StyleSheet, FlatList, Button, Platform, Image, Text, View, Clipboard } from 'react-native'
+import { StyleSheet, Alert, FlatList, Button, Platform, Image, Text, View, Clipboard } from 'react-native'
 
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
 
@@ -53,9 +53,12 @@ export default class MainRouter extends React.Component {
     };
   }
 
-  writeToClipboard = async (hash, name) => {
+  writeToClipboard = async (nickname, hash, name) => {
     await Clipboard.setString(hash);
-    alert(name + ' copied to Clipboard.');
+    Alert.alert(
+      'Copied to Clipboard',
+      hash,
+    )
   };
 
   componentDidMount() {

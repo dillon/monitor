@@ -1,15 +1,32 @@
 import React from 'react'
 
-import { StyleSheet, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
+import { StyleSheet, Alert, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
 import FeatherIcon from 'react-native-vector-icons/Feather'
+
+import TransactionListItem from '../components/TransactionListItem'
 
 import { Colors } from '../../design/Constants'
 
 export default class SingleWallet extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {}
   };
+
+
+
+  componentDidMount() {
+    const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
+    if (wallet.transactions) {
+      wallet.transactions.sort(function (a, b) {
+        return b.timeStamp - a.timeStamp
+      })
+      this.setState({
+        transactions: wallet.transactions
+      });
+    }
+  }
 
   static navigationOptions = ({ navigation }) => {
     const wallet = navigation.getParam('wallet', 'wallet')
@@ -29,20 +46,68 @@ export default class SingleWallet extends React.Component {
     };
   };
 
+  handleDeleteButton = (nickname, address) => {
+    const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
+
+    Alert.alert(
+      `Delete ${nickname}?`,
+      `${address}`,
+      [
+        { text: 'Cancel' },
+        {
+          text: 'Delete', onPress: () => {
+            this.props.screenProps.deleteAddress(address);
+            this.props.navigation.goBack();
+          }
+        },
+      ]
+    )
+  }
+
+  renderItem = (metaItem) => {
+    const { item } = metaItem
+    return (<TransactionListItem navigation={this.props.navigation} item={item} showNickName={false} />)
+  }
+
   render() {
     const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
+    const { transactions } = this.state
     return (
-      <View style={styles.walletColumns}>
+      <View style={StyleSheet.absoluteFill}>
         <View>
-          <Text style={styles.nickname}>{wallet.nickname}{wallet.updated && ' updated!'}{wallet.transactions && ' (' + wallet.transactions.length + ')'}</Text>
-          <Text style={styles.address}>{wallet.address}</Text>
-          <Text style={styles.address}>{wallet.webhookId && wallet.webhookId}</Text>
+          <View style={{ padding: 15, backgroundColor: Colors.primary, color: Colors.white, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
+            <Text style={{ color: Colors.white, fontSize: 14, fontWeight: '600' }}>Balance</Text>
+            <Text style={{ color: Colors.white, fontSize: 24 }}>{wallet.balance && wallet.balance || 0} <Text style={{ color: Colors.grey, fontWeight: '600' }}> ETH</Text></Text>
+            <View style={{ margin: 10, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+              <TouchableOpacity style={styles.deleteButton} onPress={() => { this.handleDeleteButton(wallet.nickname, wallet.address) }}>
+                <Text style={{ color: Colors.red, fontSize: 12, padding: 4 }}>Delete</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.copyButton} onPress={() => { this.props.screenProps.writeToClipboard(wallet.nickname, wallet.address, 'Wallet address') }}>
+                <Text style={{ color: Colors.white, fontSize: 12 }}>Copy Address</Text>
+                <View style={{ padding: 5 }}>
+                  <FeatherIcon name='copy' color={Colors.white} size={12} />
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
-        <TouchableOpacity style={styles.copyButton}>
-              <View onPress={() => { this.props.screenProps.writeToClipboard(item.address, 'Wallet address') }}>
-                <FeatherIcon name='copy' color={Colors.primary} size={15}/>
-              </View>
-            </TouchableOpacity>
+        <View style={styles.walletColumns}>
+          {transactions &&
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              removeClippedSubviews={false}
+              style={{ flex: 1 }}
+              data={transactions}
+              renderItem={this.renderItem}
+              keyExtractor={(tx, i) => tx.txHash + i}
+              backgroundColor={Colors.white}
+            >
+            </FlatList>
+          }
+          {!transactions &&
+            <View style={{ backgroundColor: Colors.white }} />
+          }
+        </View>
       </View>
 
     )
@@ -81,10 +146,12 @@ const styles = StyleSheet.create({
     marginBottom: -1
   },
   walletColumns: {
+    backgroundColor: Colors.white,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'flex-start',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flex: 1,
   },
   nickname: {
     fontSize: 12,
@@ -94,15 +161,25 @@ const styles = StyleSheet.create({
     color: Colors.grey
   },
   copyButton: {
-    width: 32,
-    height: 32,
-    borderRadius: 50,
-    backgroundColor: Colors.grey,
+    borderRadius: 25,
     borderColor: Colors.grey,
     borderWidth: 1,
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-
+    flexDirection: 'row',
+    alignItems: 'baseline',
+    paddingLeft: 8,
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingRight: 3,
   },
+  deleteButton: {
+    borderRadius: 25,
+    borderColor: Colors.red,
+    borderWidth: 1,
+    paddingLeft: 3,
+    paddingTop: 3,
+    paddingBottom: 3,
+    paddingRight: 3,
+    marginRight: 30
+  }
 })

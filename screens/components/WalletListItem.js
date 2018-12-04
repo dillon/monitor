@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginLeft: 10,
     borderRadius: 5,
-    borderColor: Colors.primary,
+    borderColor: Colors.darkGrey,
     borderWidth: 1,
   },
   walletDoneFetching: {

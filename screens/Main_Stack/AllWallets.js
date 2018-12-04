@@ -60,13 +60,13 @@ export default class AllWallets extends React.Component {
   navigateToSingleWallet = (wallet) => {
     this.props.navigation.navigate(
       'SingleWallet',
-      { wallet: wallet, deleteWallet: this.props.deleteWallet })
+      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, writeToClipboard: this.props.screenProps.writeToClipboard })
   }
 
 
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return <WalletListItem navigateToSingleWallet={this.navigateToSingleWallet} wallet={item} deleteAddress={this.props.screenProps.deleteAddress}/>
+    return <WalletListItem navigateToSingleWallet={this.navigateToSingleWallet} wallet={item} deleteAddress={this.props.screenProps.deleteAddress} />
   }
 
   render() {
@@ -144,7 +144,7 @@ export default class AllWallets extends React.Component {
         </View>
         {wallets &&
           <FlatList
-          backgroundColor={Colors.white}
+            backgroundColor={Colors.white}
             removeClippedSubviews={false}
             style={{ flex: 1 }}
             data={wallets}

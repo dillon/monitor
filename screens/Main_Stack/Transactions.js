@@ -13,11 +13,11 @@ export default class Transactions extends React.Component {
 
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return (<TransactionListItem navigation={this.props.navigation} item={item} />)
+    return (<TransactionListItem navigation={this.props.navigation} item={item} showNickName={true} />)
   }
 
   render() {
-    const { currentUser, errorMessage, wallets, transactions, handleSignOut, addAddress } = this.props.screenProps
+    const { currentUser, errorMessage, transactions, wallets, handleSignOut, addAddress } = this.props.screenProps
     return (
       <View style={StyleSheet.absoluteFill}>
         {errorMessage &&
@@ -34,10 +34,11 @@ export default class Transactions extends React.Component {
             keyExtractor={(tx, i) => tx.txHash + i}
             backgroundColor={Colors.white}
           >
-            {!transactions &&
-              <View style={{ backgroundColor: Colors.white }} />
-            }
+
           </FlatList>
+        }
+        {!transactions &&
+          <View style={{ backgroundColor: Colors.white }} />
         }
       </View>
     )
