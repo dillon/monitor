@@ -74,7 +74,6 @@ export default class AllWallets extends React.Component {
     return (
       <View style={StyleSheet.absoluteFill}>
         {/* <StatusBar
-          backgroundColor="blue"
           barStyle="light-content"
         /> */}
         <View style={{ backgroundColor: Colors.primary }}>

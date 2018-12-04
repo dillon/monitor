@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { StyleSheet, FlatList, Button, Platform, Image, Text, View } from 'react-native'
+import { StyleSheet, StatusBar, FlatList, Button, Platform, Image, Text, View } from 'react-native'
 
 
 export default class Profile extends React.Component {
-  
+
   render() {
     const { currentUser, errorMessage, wallets, handleSignOut } = this.props.screenProps
     return (

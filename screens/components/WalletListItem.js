@@ -29,7 +29,7 @@ export default class Transactions extends React.PureComponent {
             <View style={styles.walletColumns}>
               <View>
                 <Text style={styles.nickname}>{wallet.nickname}</Text>
-                <Text style={styles.value}>{wallet.value && wallet.value || 0} <Text style={{color:Colors.grey}}> ETH</Text></Text>
+                <Text style={styles.value}>{wallet.balance && wallet.balance.toFixed(8) || 0} <Text style={{color:Colors.grey}}> ETH</Text></Text>
                 <Text style={styles.address}>{wallet.address}</Text>
                 {/* <Text style={styles.address}>{wallet.webhookId && wallet.webhookId}</Text> */}
               </View>
@@ -62,11 +62,11 @@ const styles = StyleSheet.create({
   walletDoneFetching: {
     padding: 10,
     marginBottom: -1,
-    borderRadius: 5,
+    // borderRadius: 5,
   },
   walletStillFetching: {
     backgroundColor: Colors.grey,
-    borderRadius: 5,
+    // borderRadius: 5,
     padding: 10,
     marginBottom: -1,
   },
