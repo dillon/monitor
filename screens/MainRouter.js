@@ -81,8 +81,9 @@ export default class MainRouter extends React.Component {
               return new Date(b.createdOn) - new Date(a.createdOn)
             })
           }
-          const transactionsArray = [];
+          let transactionsArray = undefined;
           if (walletsArray) {
+            transactionsArray = []
             walletsArray.map((wallet) => {
               if (wallet.transactions && wallet.transactions.length >= 0) {
                 wallet.transactions.map((tx) => {

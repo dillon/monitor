@@ -46,7 +46,9 @@ export default class Transactions extends React.Component {
           </FlatList>
         }
         {!transactions &&
-          <View style={{ backgroundColor: Colors.white }} />
+          <View style={{ backgroundColor: Colors.white, flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ color: Colors.darkGrey }}>...you have no transactions</Text>
+          </View>
         }
       </View>
     )
