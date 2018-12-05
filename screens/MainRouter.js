@@ -4,9 +4,9 @@ import React from 'react'
 
 import { StyleSheet, Alert, FlatList, Button, Platform, Image, Text, View, Clipboard } from 'react-native'
 
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation'
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
-import firebase from 'react-native-firebase'
+import firebase from 'react-native-firebase';
 
 import Transactions from './Main_Stack/Transactions'
 import WalletsRouter from './Main_Stack/WalletsRouter'
@@ -73,26 +73,30 @@ export default class MainRouter extends React.Component {
     firebase.database().ref(`users/${uid}`)
       .on('value', (snapshot) => {
         const val = snapshot.val()
-        const walletsArray = val.wallets ? Object.keys(val.wallets).map(i => val.wallets[i]) : undefined;
-        if (walletsArray) {
-          walletsArray.sort(function (a, b) {
-            return new Date(b.createdOn) - new Date(a.createdOn)
+        let walletsArray = []
+        try {
+          if (val.wallets) {
+            walletsArray = val.wallets && Object.keys(val.wallets).map(i => val.wallets[i]);
+            walletsArray.sort(function (a, b) {
+              return new Date(b.createdOn) - new Date(a.createdOn)
+            })
+          }
+          const transactionsArray = [];
+          if (walletsArray) {
+            walletsArray.map((wallet) => {
+              if (wallet.transactions && wallet.transactions.length >= 0) {
+                wallet.transactions.map((tx) => {
+                  transactionsArray.push(tx)
+                })
+              }
+            })
+          }
+          transactionsArray.sort(function (a, b) {
+            return b.timeStamp - a.timeStamp
           })
+          this.setState({ wallets: walletsArray, transactions: transactionsArray })
         }
-        const transactionsArray = [];
-        if (walletsArray) {
-          walletsArray.map((wallet) => {
-            if (wallet.transactions && wallet.transactions.length >= 0) {
-              wallet.transactions.map((tx) => {
-                transactionsArray.push(tx)
-              })
-            }
-          })
-        }
-        transactionsArray.sort(function (a, b) {
-          return b.timeStamp - a.timeStamp
-        })
-        this.setState({ wallets: walletsArray, transactions: transactionsArray })
+        catch { }
       })
   }
 
@@ -101,6 +105,17 @@ export default class MainRouter extends React.Component {
       .signOut()
       .then(() => this.props.navigation.navigate('Login'))
       .catch(error => this.handleErrorMessage(error.message))
+  }
+
+  handleDeleteAccount = async () => {
+    firebase.auth().currentUser.delete()
+      .then(function () {
+        Alert.alert(
+          'Success',
+          'Account deleted'
+        )
+      })
+      .catch(function (error) { Alert.alert('Error', error.message) })
   }
 
   handleErrorMessage = (errorMessage) => {
@@ -142,7 +157,7 @@ export default class MainRouter extends React.Component {
 
   render() {
     const { currentUser, errorMessage, wallets, transactions } = this.state
-    const { handleSignOut, handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this
+    const { handleSignOut, handleDeleteAccount, handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this
     return (
       <MainNavigation
         screenProps={{
@@ -151,6 +166,7 @@ export default class MainRouter extends React.Component {
           wallets,
           transactions,
           handleSignOut,
+          handleDeleteAccount,
           handleErrorMessage,
           addAddress,
           deleteAddress,
