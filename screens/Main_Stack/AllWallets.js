@@ -84,7 +84,7 @@ export default class AllWallets extends React.Component {
             </View>
           }
           {this.state.showTextInput &&
-            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', margin: 10 }}>
+            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'baseline', marginRight: 10, marginBottom: 10, marginLeft: 10 }}>
               <TextInput
                 style={{
                   padding: 8,

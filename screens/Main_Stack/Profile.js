@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     paddingBottom: 3,
     paddingRight: 3,
-    margin: 30
+    marginTop: 30
   },
   deleteAccountButton: {
     borderRadius: 25,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     paddingBottom: 3,
     paddingRight: 3,
-    margin: 30
+    marginTop: 30
   }
 })
 

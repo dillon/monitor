@@ -8,6 +8,8 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 
 import firebase from 'react-native-firebase';
 
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+
 import Transactions from './Main_Stack/Transactions'
 import WalletsRouter from './Main_Stack/WalletsRouter'
 import Profile from './Main_Stack/Profile'
@@ -26,6 +28,7 @@ const MainNavigation = createBottomTabNavigator(
     Profile: Profile
   },
   {
+    initialRouteName: 'Wallets',
     tabBarOptions: {
       activeTintColor: Colors.black,
       inactiveTintColor: Colors.grey,

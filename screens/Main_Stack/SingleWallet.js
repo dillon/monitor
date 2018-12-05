@@ -3,6 +3,7 @@ import React from 'react'
 import { StyleSheet, Alert, TouchableHighlight, TouchableOpacity, FlatList, Button, Platform, Image, Text, TextInput, View } from 'react-native'
 
 import FeatherIcon from 'react-native-vector-icons/Feather'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
 import TransactionListItem from '../components/TransactionListItem'
 
