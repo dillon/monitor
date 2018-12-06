@@ -22,7 +22,7 @@ export default class TransactionsRouter extends React.Component {
   render() {
     const {
       currentUser, errorMessage,
-      transactions
+      transactions, writeToClipboard
     } = this.props.screenProps
     return (
       <TransactionsNavigation
@@ -30,6 +30,7 @@ export default class TransactionsRouter extends React.Component {
           currentUser,
           errorMessage,
           transactions,
+          writeToClipboard
         }}
         navigation={this.props.navigation}
       />

@@ -77,8 +77,8 @@ export default class AllWallets extends React.Component {
         <View style={{ backgroundColor: Colors.primary }}>
           {!this.state.showTextInput &&
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginRight: 10, marginBottom: 10 }}>
-              {!wallets && <Text style={{ marginBottom: 4, marginRight: 7, color: Colors.grey, fontSize: 16 }}>Add Address</Text>}
-              <Icon name='pluscircle' size={35} color={Colors.grey} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+              {!wallets && <Text style={{ marginBottom: 4, marginRight: 7, color: Colors.white, fontSize: 16 }}>Add Address</Text>}
+              <Icon name='pluscircleo' size={35} color={Colors.white} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
             </View>
           }
           {this.state.showTextInput &&
@@ -102,7 +102,7 @@ export default class AllWallets extends React.Component {
                 blurOnSubmit={true}
                 maxLength={42}
               ></TextInput>
-              <Icon style={{ marginLeft: 10 }} name='minuscircleo' size={35} color={Colors.grey} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+              <Icon style={{ marginLeft: 10 }} name='minuscircleo' size={35} color={Colors.white} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
             </View>
           }
           {this.state.showTextInput &&

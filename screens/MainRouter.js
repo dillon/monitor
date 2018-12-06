@@ -9,6 +9,8 @@ import { createBottomTabNavigator, createStackNavigator } from 'react-navigation
 import firebase from 'react-native-firebase';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntDesign from 'react-native-vector-icons/AntDesign'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import TransactionsRouter from './Main_Stack/TransactionsRouter'
 import WalletsRouter from './Main_Stack/WalletsRouter'
@@ -23,18 +25,48 @@ import { Colors } from '../design/Constants';
 
 const MainNavigation = createBottomTabNavigator(
   {
-    Transactions: TransactionsRouter,
-    Wallets: WalletsRouter,
-    Profile: Profile
+    Transactions: {
+      screen: TransactionsRouter,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialIcons
+            name='compare-arrows'
+            color={tintColor}
+            size={33}
+          />
+        )
+      })
+    },
+    Wallets: {
+      screen: WalletsRouter,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <AntDesign
+            name='wallet'
+            color={tintColor}
+            size={23}
+          />
+        )
+      })
+    },
+    Profile: {
+      screen: Profile,
+      navigationOptions: () => ({
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialCommunityIcons
+            name='face-profile'
+            color={tintColor}
+            size={23}
+          />
+        )
+      })
+    }
   },
   {
     initialRouteName: 'Wallets',
     tabBarOptions: {
-      activeTintColor: Colors.black,
+      activeTintColor: Colors.primary,
       inactiveTintColor: Colors.grey,
-      // labelStyle: {
-      //   fontSize: 12,
-      // },
       style: {
         backgroundColor: Colors.white,
       },

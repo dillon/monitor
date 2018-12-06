@@ -9,9 +9,9 @@ import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
 
 export const Colors = {
   black: '#000000',
-  primary: '#3A4F66',
+  primary: '#394372',//'#3A4F66',
   red: '#DB7662',
-  green: '#5E8E81',
+  green: '#303c72',//'#5E8E81',
   darkGrey: '#939390',
   grey: '#C6C6C2',
   white: '#FDFFF9',

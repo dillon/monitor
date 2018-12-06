@@ -35,7 +35,7 @@ export default class Transactions extends React.Component {
 
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return (<TransactionListItem navigateToSingleTransaction={this.navigateToSingleTransaction} transaction={item} />)
+    return (<TransactionListItem navigateToSingleTransaction={this.navigateToSingleTransaction} writeToClipboard={this.props.screenProps.writeToClipboard} transaction={item} showNickName={true} />)
   }
 
   render() {
@@ -48,10 +48,10 @@ export default class Transactions extends React.Component {
             barStyle="light-content"
           />
         </TouchableWithoutFeedback>
-        {errorMessage &&
+        {/* {errorMessage &&
           <Text style={{ color: 'red' }}>
             {errorMessage}
-          </Text>}
+          </Text>} */}
         {transactions &&
           <FlatList
             ref={(ref) => { this.flatListRef = ref; }}
