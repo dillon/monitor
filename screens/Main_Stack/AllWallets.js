@@ -37,7 +37,7 @@ export default class AllWallets extends React.Component {
   navigateToSingleWallet = (wallet) => {
     this.props.navigation.navigate(
       'SingleWallet',
-      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, writeToClipboard: this.props.screenProps.writeToClipboard })
+      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, navigation:this.props.navigation, writeToClipboard: this.props.screenProps.writeToClipboard })
   }
 
   handleAddAddress = () => {
@@ -64,7 +64,7 @@ export default class AllWallets extends React.Component {
 
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return <WalletListItem navigateToSingleWallet={this.navigateToSingleWallet} wallet={item} deleteAddress={this.props.screenProps.deleteAddress} />
+    return <WalletListItem navigateToSingleTransaction={this.navigateToSingleTransaction} navigateToSingleWallet={this.navigateToSingleWallet} wallet={item} deleteAddress={this.props.screenProps.deleteAddress} />
   }
 
   render() {

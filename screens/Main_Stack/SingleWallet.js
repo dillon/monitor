@@ -65,9 +65,15 @@ export default class SingleWallet extends React.Component {
     )
   }
 
+  navigateToSingleTransaction = (transaction) => {
+    this.props.navigation.navigate(
+      'SingleTransaction',
+      { transaction: transaction, writeToClipboard: this.props.screenProps.writeToClipboard })
+  }
+
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return (<TransactionListItem navigation={this.props.navigation} item={item} showNickName={false} />)
+    return (<TransactionListItem navigation={this.props.navigation} navigateToSingleTransaction={this.navigateToSingleTransaction} transaction={item} showNickName={false} />)
   }
 
   render() {
@@ -110,7 +116,6 @@ export default class SingleWallet extends React.Component {
           }
         </View>
       </View>
-
     )
   }
 }

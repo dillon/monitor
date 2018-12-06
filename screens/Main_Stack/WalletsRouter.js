@@ -6,10 +6,12 @@ import { createStackNavigator } from 'react-navigation'
 
 import SingleWallet from './SingleWallet'
 import AllWallets from './AllWallets'
+import SingleTransaction from './SingleTransaction'
 
 const WalletsNavigation = createStackNavigator({
   AllWallets: AllWallets,
-  SingleWallet: SingleWallet
+  SingleWallet: SingleWallet,
+  SingleTransaction: SingleTransaction
 })
 
 export default class WalletsRouter extends React.Component {
