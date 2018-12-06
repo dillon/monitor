@@ -54,7 +54,7 @@ export default class MainRouter extends React.Component {
       wallets: null,
       transactions: null,
     };
-  }
+  };
 
   writeToClipboard = async (nickname, hash, name) => {
     await Clipboard.setString(hash);

@@ -83,8 +83,9 @@ export default class SingleWallet extends React.Component {
       <View style={StyleSheet.absoluteFill}>
         <View>
           <View style={{ padding: 15, backgroundColor: Colors.primary, color: Colors.white, display: 'flex', flexDirection: 'column', alignItems: 'center', }}>
-            <Text style={{ color: Colors.white, fontSize: 14, fontWeight: '600' }}>Balance</Text>
+            <Text style={{ color: Colors.white, fontSize: 14, fontWeight: '600' }}>Wallet Balance</Text>
             <Text style={{ color: Colors.white, fontSize: 24 }}>{wallet.balance && wallet.balance || 0} <Text style={{ color: Colors.grey, fontWeight: '600' }}> ETH</Text></Text>
+            <Text style={{color: Colors.darkGrey, fontSize: 12}}>{wallet.address && wallet.address}</Text>
             <View style={{ margin: 10, width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
               <TouchableOpacity style={styles.deleteButton} onPress={() => { this.handleDeleteButton(wallet.nickname, wallet.address) }}>
                 <Text style={{ color: Colors.red, fontSize: 12, padding: 4 }}>Delete</Text>
