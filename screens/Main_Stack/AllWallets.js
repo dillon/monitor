@@ -93,6 +93,7 @@ export default class AllWallets extends React.Component {
                 }}
                 placeholderTextColor={Colors.grey}
                 autoCapitalize="none"
+                autoFocus
                 color={Colors.white}
                 placeholder="0x..."
                 onChangeText={newAddress => this.setState({ newAddress })}

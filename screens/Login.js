@@ -27,6 +27,33 @@ export default class Login extends React.Component {
     return (
       <View style={styles.container}>
         <Text>Login</Text>
+        <View style={{ display: 'flex', paddingLeft: 10, paddingRight: 10, paddingBottom: 10, flexDirection: 'row', alignItems: 'baseline' }}>
+          <TextInput
+            autoFocus
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Email"
+            onChangeText={email => this.setState({ email })}
+            value={this.state.email}
+            returnKeyType='next'
+            onSubmitEditing={() => { this.secondTextInput.focus(); }}
+            blurOnSubmit={false}
+          />
+        </View>
+        <View style={{ display: 'flex', paddingLeft: 10, paddingRight: 10, paddingBottom: 10, flexDirection: 'row', alignItems: 'baseline' }}>
+          <TextInput
+            secureTextEntry
+            selectTextOnFocus
+            style={styles.textInput}
+            autoCapitalize="none"
+            placeholder="Password"
+            onChangeText={password => this.setState({ password })}
+            value={this.state.password}
+            ref={(input) => { this.secondTextInput = input; }}
+            onSubmitEditing={this.handleLogin}
+            returnKeyType='done'
+          />
+        </View>
         {confirmReset &&
           <Text style={{ color: Colors.green }}>
             {confirmReset}
@@ -35,35 +62,15 @@ export default class Login extends React.Component {
           <Text style={{ color: Colors.red }}>
             {this.state.errorMessage}
           </Text>}
-        <TextInput
-          autoFocus
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Email"
-          onChangeText={email => this.setState({ email })}
-          value={this.state.email}
-          returnKeyType='next'
-          onSubmitEditing={() => { this.secondTextInput.focus(); }}
-          blurOnSubmit={false}
-        />
-        <TextInput
-          secureTextEntry
-          selectTextOnFocus
-          style={styles.textInput}
-          autoCapitalize="none"
-          placeholder="Password"
-          onChangeText={password => this.setState({ password })}
-          value={this.state.password}
-          ref={(input) => { this.secondTextInput = input; }}
-          onSubmitEditing={this.handleLogin}
-          returnKeyType='done'
-        />
         <Button title="Login" onPress={this.handleLogin} />
+        <View style={{ height: 40 }} />
         <Button
+          color={Colors.green}
           title="Don't have an account? Sign Up"
           onPress={() => this.props.navigation.navigate('SignUp')}
         />
         <Button
+          color={Colors.green}
           title="Reset password"
           onPress={() => this.props.navigation.navigate('PasswordReset')}
         />
@@ -80,8 +87,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textInput: {
+    flex: 1,
     padding: 8,
-    width: '90%',
     borderColor: Colors.grey,
     borderWidth: 1,
     marginTop: 8
