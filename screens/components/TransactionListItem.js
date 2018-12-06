@@ -15,22 +15,18 @@ export default class Transactions extends React.PureComponent {
     super(props)
   }
   render() {
-    let { item, showNickName } = this.props
-    const date = parseInt(moment().diff(item.dateString, 'months')) <= 0 ? moment(item.dateString).fromNow() : moment(item.dateString).calendar();
+    let { transaction, showNickName, navigateToSingleTransaction } = this.props
+    const date = parseInt(moment().diff(transaction.dateString, 'months')) <= 0 ? moment(transaction.dateString).fromNow() : moment(transaction.dateString).calendar();
     return (
       <TouchableHighlight
         underlayColor='#ddd'
-        onPress={() => {
-          this.props.navigation.navigate(
-            'SingleTransaction',
-            { transaction: item })
-        }}
+        onPress={() => navigateToSingleTransaction(transaction)}
         style={styles.transaction}
       >
         <View style={styles.transactionColumn}>
           <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
             <View style={styles.iconFrame}>
-              {item.type === 'incoming'
+              {transaction.type === 'incoming'
                 ?
                 <View style={{ paddingBottom: 1, paddingLeft: 1 }}>
                   <Icon name='download' size={15} color={Colors.darkGrey} />
@@ -42,21 +38,21 @@ export default class Transactions extends React.PureComponent {
               }
             </View>
             <View style={{ display: 'flex', flexDirection: 'column' }}>
-              <Text style={item.type === 'incoming' || item.value==0 ? { color: Colors.green } : { color: Colors.red }}>
-                {(item.type === 'outgoing' && item.value!=0) && '-'}{parseFloat(item.value.toFixed(8))} <Text style={{ fontWeight: '600', color: Colors.grey }}>ETH</Text>
+              <Text style={transaction.type === 'incoming' || transaction.value == 0 ? { color: Colors.green } : { color: Colors.red }}>
+                {(transaction.type === 'outgoing' && transaction.value != 0) && '-'}{parseFloat(transaction.value.toFixed(8))} <Text style={{ fontWeight: '600', color: Colors.grey }}>ETH</Text>
               </Text>
               {showNickName && <Text style={{ fontWeight: '600', color: Colors.darkGrey }}>
-                {item.walletNickname}
+                {transaction.walletNickname}
               </Text>}
             </View>
           </View>
           <View>
-            <View style={{ display: 'flex', border: '1px solid red', flexDirection: 'column' }}>
+            <View style={{ display: 'flex', flexDirection: 'column' }}>
               <Text style={{ textAlign: 'right', color: Colors.black }}>
                 {date}
               </Text>
               <Text style={{ textAlign: 'right', color: Colors.darkGrey }}>
-                {item.type === 'incoming' ? `from ${shortenHash(item.fromAddress)}` : `to ${shortenHash(item.toAddress)}`}
+                {transaction.type === 'incoming' ? `from ${shortenHash(transaction.fromAddress)}` : `to ${shortenHash(transaction.toAddress)}`}
               </Text>
             </View>
           </View>
@@ -71,9 +67,8 @@ const styles = StyleSheet.create({
   transaction: {
     padding: 10,
     // backgroundColor: 'lightgreen',
-    borderColor: Colors.grey,
-    borderWidth: 1,
-    marginBottom: -1,
+    borderBottomColor: Colors.grey,
+    borderBottomWidth: 1,
     backgroundColor: Colors.white
   },
   transactionColumn: {

@@ -10,7 +10,7 @@ import firebase from 'react-native-firebase';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 
-import Transactions from './Main_Stack/Transactions'
+import TransactionsRouter from './Main_Stack/TransactionsRouter'
 import WalletsRouter from './Main_Stack/WalletsRouter'
 import Profile from './Main_Stack/Profile'
 import { Colors } from '../design/Constants';
@@ -23,7 +23,7 @@ import { Colors } from '../design/Constants';
 
 const MainNavigation = createBottomTabNavigator(
   {
-    Transactions: Transactions,
+    Transactions: TransactionsRouter,
     Wallets: WalletsRouter,
     Profile: Profile
   },

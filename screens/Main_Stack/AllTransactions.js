@@ -1,3 +1,4 @@
+
 import React from 'react'
 
 import { StyleSheet, TouchableWithoutFeedback, FlatList, StatusBar, TouchableHighlight, TouchableOpacity, Button, Platform, Image, Text, View } from 'react-native'
@@ -11,21 +12,41 @@ export default class Transactions extends React.Component {
     this.state = {}
   }
 
+  static navigationOptions = {
+    title: 'Transactions',
+    headerTintColor: Colors.white,
+    headerTitleStyle: {
+      color: Colors.white,
+    },
+    headerStyle: {
+      backgroundColor: Colors.primary,
+      color: Colors.white,
+      elevation: 0,
+      shadowOpacity: 0,
+      borderBottomWidth: 0
+    },
+  };
+
+  navigateToSingleTransaction = (transaction) => {
+    this.props.navigation.navigate(
+      'SingleTransaction',
+      { transaction: transaction, writeToClipboard: this.props.screenProps.writeToClipboard })
+  }
+
   renderItem = (metaItem) => {
     const { item } = metaItem
-    return (<TransactionListItem navigation={this.props.navigation} item={item} showNickName={true} />)
+    return (<TransactionListItem navigateToSingleTransaction={this.navigateToSingleTransaction} transaction={item} />)
   }
 
   render() {
-    const { currentUser, errorMessage, transactions, wallets, handleSignOut, handleDeleteAccount, addAddress } = this.props.screenProps
+    const { currentUser, errorMessage, transactions } = this.props.screenProps
     return (
       <View style={StyleSheet.absoluteFill}>
-        <StatusBar
-          backgroundColor={Colors.primary}
-          barStyle="light-content"
-        />
-        <TouchableWithoutFeedback style={{ height: 40, width: '100%', backgroundColor: Colors.primary }} onPress={() => this.flatListRef.scrollToOffset({ animated: true, offset: 0 })}>
-          <View style={{ height: 40, width: '100%', backgroundColor: Colors.primary }}></View>
+        <TouchableWithoutFeedback style={{ height: 49, width: '100%', backgroundColor: Colors.primary }} onPress={() => this.flatListRef.scrollToOffset({ animated: true, offset: 0 })}>
+          <StatusBar
+            backgroundColor={Colors.primary}
+            barStyle="light-content"
+          />
         </TouchableWithoutFeedback>
         {errorMessage &&
           <Text style={{ color: 'red' }}>

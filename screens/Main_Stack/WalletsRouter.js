@@ -7,8 +7,6 @@ import { createStackNavigator } from 'react-navigation'
 import SingleWallet from './SingleWallet'
 import AllWallets from './AllWallets'
 
-import { isWallet } from '../../utils/isAddress'
-
 const WalletsNavigation = createStackNavigator({
   AllWallets: AllWallets,
   SingleWallet: SingleWallet
@@ -18,12 +16,15 @@ export default class WalletsRouter extends React.Component {
   static router = WalletsNavigation.router;
   constructor(props) {
     super(props)
+    this.state = {}
   }
 
   render() {
-    const { currentUser, errorMessage,
+    const {
+      currentUser, errorMessage,
       wallets, transactions,
-      handleErrorMessage, addAddress, deleteAddress, writeToClipboard } = this.props.screenProps
+      handleErrorMessage, addAddress, deleteAddress, writeToClipboard
+    } = this.props.screenProps
     return (
       <WalletsNavigation
         screenProps={{

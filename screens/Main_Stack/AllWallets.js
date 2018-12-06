@@ -32,9 +32,13 @@ export default class AllWallets extends React.Component {
       shadowOpacity: 0,
       borderBottomWidth: 0
     },
-
-
   };
+
+  navigateToSingleWallet = (wallet) => {
+    this.props.navigation.navigate(
+      'SingleWallet',
+      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, writeToClipboard: this.props.screenProps.writeToClipboard })
+  }
 
   handleAddAddress = () => {
     let { newAddress, newNickname } = this.state
@@ -55,12 +59,6 @@ export default class AllWallets extends React.Component {
       this.setState({ newAddress: '', newNickname: '' })
     }
     else this.props.screenProps.handleErrorMessage('not a valid address');
-  }
-
-  navigateToSingleWallet = (wallet) => {
-    this.props.navigation.navigate(
-      'SingleWallet',
-      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, writeToClipboard: this.props.screenProps.writeToClipboard })
   }
 
 
