@@ -37,7 +37,7 @@ export default class AllWallets extends React.Component {
   navigateToSingleWallet = (wallet) => {
     this.props.navigation.navigate(
       'SingleWallet',
-      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, navigation:this.props.navigation, writeToClipboard: this.props.screenProps.writeToClipboard })
+      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, navigation: this.props.navigation, writeToClipboard: this.props.screenProps.writeToClipboard })
   }
 
   handleAddAddress = () => {
@@ -55,7 +55,7 @@ export default class AllWallets extends React.Component {
 
     if (isWallet(wallet)) {
       this.props.screenProps.addAddress(wallet); // add wallet
-      this.props.screenProps.handleErrorMessage(null); // delete error message
+      this.props.screenProps.handleErrorMessage(); // delete error message
       this.setState({ newAddress: '', newNickname: '' })
     }
     else this.props.screenProps.handleErrorMessage('not a valid address');
@@ -77,8 +77,7 @@ export default class AllWallets extends React.Component {
         <View style={{ backgroundColor: Colors.primary }}>
           {!this.state.showTextInput &&
             <View style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginRight: 10, marginBottom: 10 }}>
-              {!wallets && <Text style={{ marginBottom: 4, marginRight: 7, color: Colors.white, fontSize: 16 }}>Add Address</Text>}
-              <Icon name='pluscircleo' size={35} color={Colors.white} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+              <Icon name='pluscircleo' size={35} color={Colors.white} onPress={() => { handleErrorMessage(); this.setState({ showTextInput: !this.state.showTextInput }) }} />
             </View>
           }
           {this.state.showTextInput &&
@@ -103,7 +102,7 @@ export default class AllWallets extends React.Component {
                 blurOnSubmit={true}
                 maxLength={42}
               ></TextInput>
-              <Icon style={{ marginLeft: 10 }} name='minuscircleo' size={35} color={Colors.white} onPress={() => this.setState({ showTextInput: !this.state.showTextInput })} />
+              <Icon style={{ marginLeft: 10 }} name='minuscircleo' size={35} color={Colors.white} onPress={() => { handleErrorMessage(); this.setState({ showTextInput: !this.state.showTextInput }) }} />
             </View>
           }
           {this.state.showTextInput &&
@@ -137,7 +136,7 @@ export default class AllWallets extends React.Component {
             </View>
           }
           {errorMessage &&
-            <Text style={{ marginLeft: 10, marginRight: 10, color: Colors.red }}>
+            <Text style={{ marginLeft: 10, textAlign: 'center', marginRight: 10, color: Colors.red }}>
               {errorMessage}
             </Text>
           }
@@ -154,8 +153,10 @@ export default class AllWallets extends React.Component {
           >
           </FlatList>
         }
-        {!wallets &&
-          <View style={{ flex: 1, backgroundColor: Colors.white }} />
+        {!wallets && !this.state.showTextInput &&
+          <View style={{ flex: 1, paddingTop: 100, backgroundColor: Colors.white }}>
+            <Button title="Add Address" color={Colors.primary} onPress={() => { handleErrorMessage(); this.setState({ showTextInput: !this.state.showTextInput }) }} />
+          </View>
         }
       </View>
     )

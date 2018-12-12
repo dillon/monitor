@@ -17,7 +17,7 @@ import WalletsRouter from './Main_Stack/WalletsRouter'
 import Profile from './Main_Stack/Profile'
 import { Colors } from '../design/Constants';
 
-
+import { BLOCKCYPHER_API_KEY } from '../secrets'
 
 // how to set up a stack navigator for each tab:
 // https://reactnavigation.org/docs/en/tab-based-navigation.html
@@ -101,7 +101,52 @@ export default class MainRouter extends React.Component {
     if (!this.state.currentUser) {
       this.setState({ currentUser })
       this.readUserData(currentUser.uid)
+
+      firebase.messaging().requestPermission()
+        .then(() => {
+          firebase.messaging().getToken()
+            .then(token => {
+              console.log('requestPermission - user has permission')
+              firebase.database().ref(`users/${currentUser.uid}`)
+                .update({ pushToken: token })
+              // .catch((err) => { this.handleErrorMessage(err) })
+              return true
+            })
+        })
+
+      const messagingRequestPermission = () => {
+        console.log('firebase messaging requesting permission')
+        return firebase.messaging().requestPermission()
+          .then(() => {
+            firebase.messaging().getToken()
+              .then(token => {
+                console.log('requestPermission - user has permission')
+                firebase.database().ref(`users/${currentUser.uid}`)
+                  .update({ pushToken: token })
+                // .catch((err) => { this.handleErrorMessage(err) })
+                return true
+              })
+          })
+          .catch(error => {
+            console.log('requestPermission - does not have permission')
+            return false
+          });
+      }
+      messagingRequestPermission();
     }
+
+    // const FCM = firebase.messaging();
+    // FCM.requestPermissions();
+    // // gets the device's push token
+    // FCM.getToken().then(token => {
+    //   // stores the token in the user's document
+    //   firebase.database().ref(`users/${uid}`)
+    //   .child('pushToken').set(token)
+    // });
+
+    // check to make sure the user is authenticated
+    // requests permissions from the user
+
   }
 
   readUserData = async (uid) => {
@@ -115,24 +160,33 @@ export default class MainRouter extends React.Component {
             walletsArray.sort(function (a, b) {
               return new Date(b.createdOn) - new Date(a.createdOn)
             })
-          }
-          let transactionsArray = undefined;
-          if (walletsArray) {
-            transactionsArray = []
+            let transactionsArray = [];
+            walletsArray.map((wallet, index) => {
+              let transactionsForSingleWallet = []
+              if (wallet.transactions) {
+                Object.keys(wallet.transactions).map((tx) => {
+                  transactionsArray.push(wallet.transactions[tx])
+                  return transactionsForSingleWallet.push(wallet.transactions[tx])
+                });
+              }
+              transactionsForSingleWallet.sort(function (a, b) {
+                return b.timeStamp - a.timeStamp
+              })
+              walletsArray[index].transactions = transactionsForSingleWallet;
+            });
+            this.setState({ wallets: walletsArray })
             walletsArray.map((wallet) => {
-              if (wallet.transactions && wallet.transactions.length >= 0) {
-                wallet.transactions.map((tx) => {
-                  transactionsArray.push(tx)
-                })
+              if (wallet.transactions) {
+                Object.keys(wallet.transactions).map(tx => transactionsArray.push(wallet.transactions[tx]))
               }
             })
+            transactionsArray.sort(function (a, b) {
+              return b.timeStamp - a.timeStamp
+            })
+            this.setState({ transactions: transactionsArray })
           }
-          transactionsArray.sort(function (a, b) {
-            return b.timeStamp - a.timeStamp
-          })
-          this.setState({ wallets: walletsArray, transactions: transactionsArray })
         }
-        catch { }
+        catch { (error) => this.handleErrorMessage(error.message) }
       })
   }
 
@@ -145,11 +199,12 @@ export default class MainRouter extends React.Component {
 
   handleDeleteAccount = async () => {
     firebase.auth().currentUser.delete()
-      .then(function () {
+      .then(() => {
         Alert.alert(
           'Success',
           'Account deleted'
         )
+        this.handleSignOut()
       })
       .catch(function (error) { Alert.alert('Error', error.message) })
   }
@@ -182,8 +237,24 @@ export default class MainRouter extends React.Component {
     firebase.database().ref(`users/${uid}/wallets`).orderByChild('address').equalTo(address).limitToFirst(1)
       .once('value', snapshot => {
         if (snapshot.exists()) {
-          snapshot.forEach(function (child) {
-            child.ref.remove();
+          snapshot.forEach((child) => {
+            // const wallet = child;
+            const webhookId = child.child('webhookId').val()
+            fetch(
+              `https://api.blockcypher.com/v1/eth/main/hooks/${webhookId}?token=${BLOCKCYPHER_API_KEY}`,
+              {
+                method: 'DELETE', // DELETE method
+                headers: {
+                  'Content-Type': 'application/json',
+                }
+
+              }
+            )
+              // .then(response => this.handleErrorMessage(JSON.stringify(response)))
+              .then(() =>
+                child.ref.remove().catch((err) => this.handleErrorMessage(err.message))
+              )
+              .catch(err => this.handleErrorMessage(err.message))
           });
         } else {
           this.handleErrorMessage('could not delete wallet: does not exist')

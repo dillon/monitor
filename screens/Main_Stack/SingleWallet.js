@@ -34,17 +34,18 @@ export default class SingleWallet extends React.Component {
   };
 
 
-  componentDidMount() {
-    const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
-    if (wallet.transactions) {
-      wallet.transactions.sort(function (a, b) {
-        return b.timeStamp - a.timeStamp
-      })
-      this.setState({
-        transactions: wallet.transactions
-      });
-    }
-  }
+  // componentDidMount() {
+  //   const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
+  //   let transactionsArray = undefined;
+  //   if (wallet.transactions) {
+  //     wallet.transactions.sort(function (a, b) {
+  //       return b.timeStamp - a.timeStamp
+  //     })
+  //     this.setState({
+  //       transactions: wallet.transactions
+  //     });
+  //   }
+  // }
 
 
   handleDeleteButton = (nickname, address) => {
@@ -78,7 +79,7 @@ export default class SingleWallet extends React.Component {
 
   render() {
     const wallet = this.props.navigation.getParam('wallet', 'wallet') // second param is its default value (string)
-    const { transactions } = this.state
+    const { transactions } = wallet
     return (
       <View style={StyleSheet.absoluteFill}>
         <View>

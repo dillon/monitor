@@ -54,6 +54,9 @@ export default class Profile extends React.Component {
           <Text>
             {currentUser.email && currentUser.email}
           </Text>
+          <Text>
+            {currentUser.uid && currentUser.uid}
+          </Text>
           <TouchableOpacity style={styles.signOutButton} onPress={this.handleSignOutConfirmation}>
             <Text style={{ color: Colors.primary, fontSize: 12, padding: 4 }}>Sign out</Text>
           </TouchableOpacity>
