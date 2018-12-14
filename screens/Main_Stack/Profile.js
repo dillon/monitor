@@ -10,7 +10,7 @@ export default class Profile extends React.Component {
   handleSignOutConfirmation = () => {
     Alert.alert(
       'Sign out user',
-      this.props.screenProps.currentUser.email + ' ?',
+      this.props.screenProps.currentUser.email + ' ?' || '',
       [
         { text: 'Cancel' },
         {
@@ -25,7 +25,7 @@ export default class Profile extends React.Component {
   handleDeleteAccountConfirmation = () => {
     Alert.alert(
       'Delete account',
-      this.props.screenProps.currentUser.email + ' ?',
+      this.props.screenProps.currentUser.email + ' ?' || '',
       [
         { text: 'Cancel' },
         {
@@ -53,9 +53,6 @@ export default class Profile extends React.Component {
             </Text>} */}
           <Text>
             {currentUser.email && currentUser.email}
-          </Text>
-          <Text>
-            {currentUser.uid && currentUser.uid}
           </Text>
           <TouchableOpacity style={styles.signOutButton} onPress={this.handleSignOutConfirmation}>
             <Text style={{ color: Colors.primary, fontSize: 12, padding: 4 }}>Sign out</Text>

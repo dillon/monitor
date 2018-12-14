@@ -70,5 +70,5 @@ package-lock.json
 # My own private notes
 PRIVATE_NOTES.md
 
-# secret keys
-secrets.js
+# secret keys and certs
+/secrets

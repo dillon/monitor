@@ -25,6 +25,12 @@ target 'Monitor' do
   pod 'Fabric', '~> 1.7.13'
   pod 'Crashlytics', '~> 3.10.9'
 
+  target 'ReactPushNotificationsTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+
   # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end

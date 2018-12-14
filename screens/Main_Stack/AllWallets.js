@@ -37,7 +37,8 @@ export default class AllWallets extends React.Component {
   navigateToSingleWallet = (wallet) => {
     this.props.navigation.navigate(
       'SingleWallet',
-      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, navigation: this.props.navigation, writeToClipboard: this.props.screenProps.writeToClipboard })
+      { wallet: wallet, deleteWallet: this.props.screenProps.deleteWallet, navigation: this.props.navigation, writeToClipboard: this.props.screenProps.writeToClipboard }
+    )
   }
 
   handleAddAddress = () => {
@@ -56,7 +57,7 @@ export default class AllWallets extends React.Component {
     if (isWallet(wallet)) {
       this.props.screenProps.addAddress(wallet); // add wallet
       this.props.screenProps.handleErrorMessage(); // delete error message
-      this.setState({ newAddress: '', newNickname: '' })
+      this.setState({ newAddress: '', newNickname: '', showTextInput: false })
     }
     else this.props.screenProps.handleErrorMessage('not a valid address');
   }

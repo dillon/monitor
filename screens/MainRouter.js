@@ -2,7 +2,7 @@
 // MainRouter.js
 import React from 'react'
 
-import { StyleSheet, Alert, FlatList, Button, Platform, Image, Text, View, Clipboard } from 'react-native'
+import { StyleSheet, Alert, FlatList, Button, Platform, AsyncStorage, Image, Text, View, Clipboard } from 'react-native'
 
 import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
 
@@ -17,7 +17,7 @@ import WalletsRouter from './Main_Stack/WalletsRouter'
 import Profile from './Main_Stack/Profile'
 import { Colors } from '../design/Constants';
 
-import { BLOCKCYPHER_API_KEY } from '../secrets'
+import { BLOCKCYPHER_API_KEY } from '../secrets/secrets'
 
 // how to set up a stack navigator for each tab:
 // https://reactnavigation.org/docs/en/tab-based-navigation.html
@@ -88,6 +88,55 @@ export default class MainRouter extends React.Component {
     };
   };
 
+  componentDidMount() {
+    const { currentUser } = firebase.auth()
+    if (!this.state.currentUser) {
+      this.setState({ currentUser })
+      this.readUserData(currentUser.uid)
+    }
+    this.checkPermission();
+    this.onTokenRefreshListener = firebase.messaging().onTokenRefresh(async (fcmToken) => {
+      if (fcmToken) {
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+        // my code
+        firebase.database().ref(`users/${currentUser.uid}`)
+          .update({ pushToken: fcmToken })
+
+      }
+    });
+
+    this.notificationDisplayedListener = firebase.notifications().onNotificationDisplayed(async (fcmToken) => {
+      await AsyncStorage.setItem('fcmToken', fcmToken);
+      // my code
+      firebase.database().ref(`users/${currentUser.uid}`)
+        .update({ pushToken: fcmToken })
+      // ANDROID: Remote notifications do not contain the channel ID. You will have to specify this manually if you'd like to re-display the notification.
+    });
+    this.notificationListener = firebase.notifications().onNotification((notification) => {
+      // Process your notification as required
+    });
+
+
+    this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpen) => {
+      // Get the action triggered by the notification being opened
+      const action = notificationOpen.action;
+      // Get information about the notification that was opened
+      const notification = notificationOpen.notification;
+
+      this.props.navigation.navigate('Transactions')
+    });
+
+
+
+  }
+
+  componentWillUnmount() {
+    this.onTokenRefreshListener();
+    this.notificationDisplayedListener();
+    this.notificationListener();
+    this.notificationOpenedListener();
+  }
+
   writeToClipboard = async (nickname, hash, name) => {
     await Clipboard.setString(hash);
     Alert.alert(
@@ -96,58 +145,58 @@ export default class MainRouter extends React.Component {
     )
   };
 
-  componentDidMount() {
-    const { currentUser } = firebase.auth()
-    if (!this.state.currentUser) {
-      this.setState({ currentUser })
-      this.readUserData(currentUser.uid)
+  // const FCM = firebase.messaging();
+  // FCM.requestPermissions();
+  // // gets the device's push token
+  // FCM.getToken().then(token => {
+  //   // stores the token in the user's document
+  //   firebase.database().ref(`users/${uid}`)
+  //   .child('pushToken').set(token)
+  // });
 
-      firebase.messaging().requestPermission()
-        .then(() => {
-          firebase.messaging().getToken()
-            .then(token => {
-              console.log('requestPermission - user has permission')
-              firebase.database().ref(`users/${currentUser.uid}`)
-                .update({ pushToken: token })
-              // .catch((err) => { this.handleErrorMessage(err) })
-              return true
-            })
-        })
+  // check to make sure the user is authenticated
+  // requests permissions from the user
 
-      const messagingRequestPermission = () => {
-        console.log('firebase messaging requesting permission')
-        return firebase.messaging().requestPermission()
-          .then(() => {
-            firebase.messaging().getToken()
-              .then(token => {
-                console.log('requestPermission - user has permission')
-                firebase.database().ref(`users/${currentUser.uid}`)
-                  .update({ pushToken: token })
-                // .catch((err) => { this.handleErrorMessage(err) })
-                return true
-              })
-          })
-          .catch(error => {
-            console.log('requestPermission - does not have permission')
-            return false
-          });
-      }
-      messagingRequestPermission();
+
+
+  //1
+  async checkPermission() {
+    const enabled = await firebase.messaging().hasPermission();
+    if (enabled) {
+      this.getToken();
+    } else {
+      this.requestPermission();
     }
-
-    // const FCM = firebase.messaging();
-    // FCM.requestPermissions();
-    // // gets the device's push token
-    // FCM.getToken().then(token => {
-    //   // stores the token in the user's document
-    //   firebase.database().ref(`users/${uid}`)
-    //   .child('pushToken').set(token)
-    // });
-
-    // check to make sure the user is authenticated
-    // requests permissions from the user
-
   }
+
+  //3
+  async getToken() {
+    const { currentUser } = firebase.auth()
+    let fcmToken = await AsyncStorage.getItem('fcmToken');
+    if (!fcmToken) {
+      fcmToken = await firebase.messaging().getToken();
+      if (fcmToken) {
+        // user has a device token
+        await AsyncStorage.setItem('fcmToken', fcmToken);
+        // my code
+        firebase.database().ref(`users/${currentUser.uid}`)
+          .update({ pushToken: fcmToken })
+      }
+    }
+  }
+
+  //2
+  async requestPermission() {
+    try {
+      await firebase.messaging().requestPermission();
+      // User has authorised
+      this.getToken();
+    } catch (error) {
+      // User has rejected permissions
+      console.log('permission rejected');
+    }
+  }
+
 
   readUserData = async (uid) => {
     firebase.database().ref(`users/${uid}`)
