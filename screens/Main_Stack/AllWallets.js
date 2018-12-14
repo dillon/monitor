@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
   },
   address: {
     fontSize: 10,
-    color: Colors.grey
+    color: Colors.darkGrey
   },
   copyButton: {
     width: 32,
