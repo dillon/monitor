@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "Monitor.app"
+               BuildableName = "monitor.temp_caseinsensitive_rename.app"
                BlueprintName = "Monitor"
-               ReferencedContainer = "container:Monitor.xcodeproj">
+               ReferencedContainer = "container:monitor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "MonitorTests.xctest"
                BlueprintName = "MonitorTests"
-               ReferencedContainer = "container:Monitor.xcodeproj">
+               ReferencedContainer = "container:monitor.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -63,7 +63,7 @@
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
                BuildableName = "MonitorTests.xctest"
                BlueprintName = "MonitorTests"
-               ReferencedContainer = "container:Monitor.xcodeproj">
+               ReferencedContainer = "container:monitor.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Monitor.app"
+            BuildableName = "monitor.temp_caseinsensitive_rename.app"
             BlueprintName = "Monitor"
-            ReferencedContainer = "container:Monitor.xcodeproj">
+            ReferencedContainer = "container:monitor.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Monitor.app"
+            BuildableName = "monitor.temp_caseinsensitive_rename.app"
             BlueprintName = "Monitor"
-            ReferencedContainer = "container:Monitor.xcodeproj">
+            ReferencedContainer = "container:monitor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "Monitor.app"
+            BuildableName = "monitor.temp_caseinsensitive_rename.app"
             BlueprintName = "Monitor"
-            ReferencedContainer = "container:Monitor.xcodeproj">
+            ReferencedContainer = "container:monitor.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

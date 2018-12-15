@@ -11,15 +11,15 @@ import { Colors } from '../design/Constants'
 export default class Login extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { email: '', password: '', errorMessage: null }
+    this.state = { email: '', password: '', errorMessage: null, confirmReset: null, }
   }
 
   handleReset = () => {
     const { email } = this.state
     firebase.auth()
       .sendPasswordResetEmail(email)
-      .then(() => this.props.navigation.navigate('Login', { confirmReset: 'Password Reset email sent.' }))
-      .catch(error => this.setState({ errorMessage: error.message }))
+      .then(() => this.props.navigation.navigate('Login', () => this.setState({ confirmReset: 'Password Reset email sent.' })))
+        .catch(error => this.setState({ errorMessage: error.message }))
   }
 
   render() {
@@ -42,9 +42,9 @@ export default class Login extends React.Component {
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        {confirmReset &&
+        {this.state.confirmReset &&
           <Text style={{ color: Colors.green }}>
-            {confirmReset}
+            {this.state.confirmReset}
           </Text>}
         <Button title="Reset" onPress={this.handleReset} />
         <View style={{ height: 40 }} />

@@ -38,7 +38,7 @@ export default class Transactions extends React.PureComponent {
               }
             </View>
             <View style={{ display: 'flex', flexDirection: 'column' }}>
-              <Text style={transaction.type === 'incoming' || transaction.value == 0 ? { color: Colors.green } : { color: Colors.red }}>
+              <Text style={transaction.type === 'incoming' ? { color: Colors.green } : { color: Colors.red }}>
                 {(transaction.type === 'outgoing' && transaction.value != 0) && '-'}{parseFloat(transaction.value.toFixed(8))} <Text style={{ fontWeight: '600', color: Colors.grey }}>ETH</Text>
               </Text>
               {showNickName && <Text style={{ fontWeight: '600', color: Colors.darkGrey }}>
