@@ -1,13 +1,10 @@
-<span id="about">
-## Monitor - Ethereum Tracker<a href="https://github.com/dillon/monitor"><img align="left" src="https://github.com/dillon/monitor/blob/master/assets/web_hi_res_512.png?raw=true" width="85px" style="padding-right:15px"></a>
+## <span id="about"> Monitor - Ethereum Tracker<a href="https://github.com/dillon/monitor"><img align="left" src="https://github.com/dillon/monitor/blob/master/assets/web_hi_res_512.png?raw=true" width="85px" style="padding-right:15px"></a>
 
 [![developer](https://img.shields.io/badge/developer-dillon-red.svg)](https://github.com/dillon/)
 ![](https://img.shields.io/github/last-commit/dillon/monitor.svg)
 
 <span id="description">
 A mobile app that keeps track of Ethereum transactions and balances.
-</span>
-
 </span>
 ___
 <div style="line-height:1.2">
@@ -33,33 +30,32 @@ __[Firebase](#firebase)__<br>
 
 ___
 #### <span id="screenshots">Screenshots</span>
-<div style="display:flex;flex-direction:row" width="898px">
-<img alt="app gif 1" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/one-compressed.gif?raw=true">
-<img alt="app gif 2" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/two-compressed.gif?raw=true">
-<img alt="app gif 3" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/three-compressed.gif?raw=true">
+<div style="display:flex;flex-direction:row">
+<img alt="app gif 1" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/one-compressed.gif?raw=true">
+<img alt="app gif 2" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/two-compressed.gif?raw=true">
+<img alt="app gif 3" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/gifs/three-compressed.gif?raw=true">
 </div>
 
 <div style="display:flex;flex-direction:row">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/2-wallets.png?raw=true">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/1-transactions.png?raw=true">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/6-notification.jpeg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/2-wallets.png?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/1-transactions.png?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/6-notification.jpeg?raw=true">
 
 </div>
 
 <div style="display:flex;flex-direction:row">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/3-add-wallet.PNG?raw=true">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/4-in-wallet.png?raw=true">
-<img alt="screenshot" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/5-profile.PNG?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/3-add-wallet.PNG?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/4-in-wallet.png?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/5-profile.PNG?raw=true">
 </div>
 
 
-#### <span id="demo">Demo Video</span>
+<!-- #### <span id="demo">Demo Video</span>
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=3HaIw0yAygI
 " target="_blank"><img src="http://img.youtube.com/vi/3HaIw0yAygI/0.jpg" 
 alt="Youtube Video" width="480" height="360" border="10" /></a>
-<!-- replace example video -->
-
+-->
 
 ___
 ### <span id="technical-details">Technical Details</span>
