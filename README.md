@@ -6,6 +6,8 @@
 <span id="description">
 A mobile app that keeps track of Ethereum transactions and balances.
 </span>
+
+
 ___
 <div style="line-height:1.2">
 
