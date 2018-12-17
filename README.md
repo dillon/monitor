@@ -45,7 +45,7 @@ ___
 
 <!-- </div> -->
 
-<div style="display:flex;flex-direction:row">
+<!-- <div style="display:flex;flex-direction:row"> -->
 <!-- <img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/three.jpg?raw=true"> -->
 <img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/four.jpg?raw=true">
 <!-- <img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/five.jpg?raw=true"> -->
