@@ -39,16 +39,16 @@ ___
 </div>
 
 <div style="display:flex;flex-direction:row">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/2-wallets.png?raw=true">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/1-transactions.png?raw=true">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/6-notification.jpeg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/two.jpg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/one.jpg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/six.jpg?raw=true">
 
 </div>
 
 <div style="display:flex;flex-direction:row">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/3-add-wallet.PNG?raw=true">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/4-in-wallet.png?raw=true">
-<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/5-profile.PNG?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/three.jpg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/four.jpg?raw=true">
+<img alt="screenshot" width="33%" align="center" src="https://github.com/dillon/monitor/blob/master/assets/screenshots/images/five.jpg?raw=true">
 </div>
 
 
