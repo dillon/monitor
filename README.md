@@ -76,7 +76,7 @@ ___
 |crypto-js|moment|
 |--|--|
 
-___
+
 #### <span id="apis">APIs</span>
 
 [__BlockCypher__](https://www.blockcypher.com/dev/ethereum/)
