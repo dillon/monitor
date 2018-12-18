@@ -137,7 +137,7 @@ Code comprising all four firebase cloud functions can be found in [this reposito
 2. The client collects the unique device token (as well as listens for changes) and pushes it to the realtime database.
 3. [Firebase Functions](#functions) handles webhook callbacks and sending push notifications to users on new transactions.
 
-#### <span id="auth">User Authentication</span>
+#### <span id="authentication">User Authentication</span>
 Standard email/password user auth using [react-native-firebase](https://github.com/invertase/react-native-firebase)
 
 ___
