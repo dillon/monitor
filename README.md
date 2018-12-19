@@ -7,7 +7,9 @@
 A mobile app that keeps track of Ethereum transactions and balances.
 </span>
 
+___
 
+Separate repository with firebase cloud functions: [monitor-cloud-functions](https://github.com/dillon/monitor-cloud-functions)
 ___
 <div style="line-height:1.2">
 
