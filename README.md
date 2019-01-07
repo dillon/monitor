@@ -4,7 +4,8 @@
 ![](https://img.shields.io/github/last-commit/dillon/monitor.svg)
 
 <span id="description">
-A mobile app that keeps track of Ethereum transactions and balances.
+A mobile app that keeps track of Ethereum transactions and balances.<br/>
+Email app@dillonpetito.com for Testflight invite.
 </span>
 
 ___
