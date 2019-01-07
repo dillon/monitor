@@ -5,8 +5,8 @@
 
 <span id="description">
 A mobile app that keeps track of Ethereum transactions and balances.<br/>
-> Email app@dillonpetito.com for Testflight invite.
 </span>
+> Email app@dillonpetito.com for Testflight invite.
 
 ___
 
